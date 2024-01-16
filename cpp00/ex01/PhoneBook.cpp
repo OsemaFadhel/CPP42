@@ -6,7 +6,7 @@
 /*   By: ofadhel <ofadhel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 19:59:25 by ofadhel           #+#    #+#             */
-/*   Updated: 2024/01/16 20:08:12 by ofadhel          ###   ########.fr       */
+/*   Updated: 2024/01/16 20:58:45 by ofadhel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,31 +14,34 @@
 #include <string>
 #include <iomanip>
 
-class PhoneBook
-{
-	private:
-		Contact contacts[8];
-		int index;
-};
+#include "phonebook_class.hpp"
+#include "contact_class.hpp"
 
-class Contact
+void	PhoneBook::print()
 {
-	private:
-		std::string first_name;
-		std::string last_name;
-		std::string nickname;
-		std::string	phone_number;
-		std::string darkest_secret;
-	public:
-		Contact();
-		~Contact();
-		void add();
-		void search();
-		void print();
-
-};
-
-int main()
-{
-	return 0;
+	std::cout << std::setw(10) << "Index" << "|";
+	std::cout << std::setw(10) << "First Name" << "|";
+	std::cout << std::setw(10) << "Last Name" << "|";
+	std::cout << std::setw(10) << "Nickname" << std::endl;
+	for (int i = 0; i < this->index; i++)
+	{
+		std::cout << std::setw(10) << i << "|";
+		this->contacts[i].print();
+	}
 }
+
+void	PhoneBook::add()
+{
+	if (this->index == 8)
+	{
+		this->index = 0;
+		this->contacts[this->index].add();
+		this->index++;
+	}
+	else
+	{
+		this->contacts[this->index].add();
+		this->index++;
+	}
+}
+
