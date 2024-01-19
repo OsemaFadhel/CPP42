@@ -6,7 +6,7 @@
 /*   By: ofadhel <ofadhel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 20:27:45 by ofadhel           #+#    #+#             */
-/*   Updated: 2024/01/16 20:59:15 by ofadhel          ###   ########.fr       */
+/*   Updated: 2024/01/19 17:52:04 by ofadhel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,7 @@ class Contact
 	public:
 		Contact();
 		~Contact();
-		void add();
-		void search();
-		void print();
+		voi
 };
 
 #endif
