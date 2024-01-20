@@ -5,22 +5,21 @@
 #                                                     +:+ +:+         +:+      #
 #    By: ofadhel <ofadhel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/01/16 20:07:40 by ofadhel           #+#    #+#              #
-#    Updated: 2024/01/21 00:52:45 by ofadhel          ###   ########.fr        #
+#    Created: 2024/01/21 00:45:58 by ofadhel           #+#    #+#              #
+#    Updated: 2024/01/21 00:53:10 by ofadhel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = phonebook
+NAME = account
 
-SRC = phonebook.cpp main.cpp contact.cpp
-
-FLAGS = -Wall -Wextra -Werror -std=c++98
+SRC = tests.cpp Account.cpp
 
 OBJS 	= $(SRCS:.cpp=.o)
 
+FLAGS = -Wall -Wextra -Werror -std=c++98
+
 %.o: %.cpp
 			c++ -c $< -o $@
-
 
 all: $(NAME)
 
