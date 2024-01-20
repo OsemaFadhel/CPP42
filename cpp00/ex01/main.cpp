@@ -6,7 +6,7 @@
 /*   By: ofadhel <ofadhel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 20:58:52 by ofadhel           #+#    #+#             */
-/*   Updated: 2024/01/20 23:30:54 by ofadhel          ###   ########.fr       */
+/*   Updated: 2024/01/21 00:08:28 by ofadhel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int main()
 	printHelpPage();
 	while (1)
 	{
-		std::cout << "Enter a command: ";
+		std::cout << "\033[1;32mENTER A COMMAND:> \033[0m";
 		std::getline(std::cin, input);
 		if (std::cin.eof())
 		{

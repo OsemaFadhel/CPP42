@@ -6,7 +6,7 @@
 /*   By: ofadhel <ofadhel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 19:59:25 by ofadhel           #+#    #+#             */
-/*   Updated: 2024/01/20 23:48:51 by ofadhel          ###   ########.fr       */
+/*   Updated: 2024/01/21 00:14:36 by ofadhel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,53 +28,53 @@ void	PhoneBook::add()
 
 	if (this->index == 9)
 		this->index = 0;
-	std::cout << "Enter first name: ";
+	std::cout << "\033[1;36mEnter first name: \033[0m";
 	std::getline(std::cin, input);
 	this->contacts[this->index].setFirstName(input);
 	while (this->contacts[this->index].getFirstName().empty())
 	{
 		std::cout << "CAN'T BE EMPTY" << std::endl;
-		std::cout << "Enter first name: ";
+		std::cout << "\033[1;36mEnter first name: \033[0m";
 		std::getline(std::cin, input);
 		this->contacts[this->index].setFirstName(input);
 	}
-	std::cout << "Enter last name: ";
+	std::cout << "\033[1;36mEnter last name: \033[0m";
 	std::getline(std::cin, input);
 	this->contacts[this->index].setLastName(input);
 	while (this->contacts[this->index].getLastName().empty())
 	{
 		std::cout << "CAN'T BE EMPTY" << std::endl;
-		std::cout << "Enter last name: ";
+		std::cout << "\033[1;36mEnter last name: \033[0m";
 		std::getline(std::cin, input);
 		this->contacts[this->index].setLastName(input);
 	}
-	std::cout << "Enter nickname: ";
+	std::cout << "\033[1;36mEnter nickname: \033[0m";
 	std::getline(std::cin, input);
 	this->contacts[this->index].setNickname(input);
 	while (this->contacts[this->index].getNickname().empty())
 	{
 		std::cout << "CAN'T BE EMPTY" << std::endl;
-		std::cout << "Enter nickname: ";
+		std::cout << "\033[1;36mEnter nickname: \033[0m";
 		std::getline(std::cin, input);
 		this->contacts[this->index].setNickname(input);
 	}
-	std::cout << "Enter phone number: ";
+	std::cout << "\033[1;36mEnter phone number: \033[0m";
 	std::getline(std::cin, input);
 	this->contacts[this->index].setPhoneNumber(input);
 	while (this->contacts[this->index].getPhoneNumber().empty())
 	{
-		std::cout << "Invalid input" << std::endl;
-		std::cout << "Enter phone number: ";
+		std::cout << "CAN'T BE EMPTY" << std::endl;
+		std::cout << "\033[1;36mEnter phone number: \033[0m";
 		std::getline(std::cin, input);
 		this->contacts[this->index].setPhoneNumber(input);
 	}
-	std::cout << "Enter darkest secret: ";
+	std::cout << "\033[1;36mEnter darkest secret: \033[0m";
 	std::getline(std::cin, input);
 	this->contacts[this->index].setDarkestSecret(input);
 	while (this->contacts[this->index].getDarkestSecret().empty())
 	{
 		std::cout << "CAN'T BE EMPTY" << std::endl;
-		std::cout << "Enter darkest secret: ";
+		std::cout << "\033[1;36mEnter darkest secret: \033[0m";
 		std::getline(std::cin, input);
 		this->contacts[this->index].setDarkestSecret(input);
 	}
@@ -94,13 +94,28 @@ std::string getTrunString(std::string str)
 	return (str);
 }
 
+void	PhoneBook::printIndex(int i)
+{
+	if (i < 0 || i > 7)
+	{
+		std::cout << "Invalid index" << std::endl;
+		return ;
+	}
+	std::cout << "First name: " << this->contacts[i].getFirstName() << std::endl;
+	std::cout << "Last name: " << this->contacts[i].getLastName() << std::endl;
+	std::cout << "Nickname: " << this->contacts[i].getNickname() << std::endl;
+	std::cout << "Phone number: " << this->contacts[i].getPhoneNumber() << std::endl;
+	std::cout << "Darkest secret: " << this->contacts[i].getDarkestSecret() << std::endl;
+}
+
 void	PhoneBook::printContacts()
 {
 	int i = 0;
+	std::string input;
 
-	std::cout << "------------------------------------------" << std::endl;
-	std::cout << "   Index  |First name| Last name| Nickname" << std::endl;
-	std::cout << "------------------------------------------" << std::endl;
+	std::cout << "-------------------------------------------" << std::endl;
+	std::cout << "-  Index  |First name| Last name| Nickname-" << std::endl;
+	std::cout << "-------------------------------------------" << std::endl;
 	while (i < this->index)
 	{
 		std::cout << std::setw(10) << i << "|";
@@ -109,5 +124,15 @@ void	PhoneBook::printContacts()
 		std::cout << std::setw(10) << getTrunString(this->contacts[i].getNickname()) << std::endl;
 		i++;
 	}
-	std::cout << "------------------------------------------" << std::endl;
+	std::cout << "-------------------------------------------" << std::endl;
+	std::cout << "\033[1;35mEnter an index: \033[0m";
+	std::getline(std::cin, input);
+	while (input.length() > 1 || input[0] < '0' || input[0] > '8')
+	{
+		std::cout << "Invalid index" << std::endl;
+		std::cout << "\033[35mEnter an index: \033[0m";
+		std::getline(std::cin, input);
+	}
+	i = input[0] - '0';
+	printIndex(i);
 }

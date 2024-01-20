@@ -6,7 +6,7 @@
 /*   By: ofadhel <ofadhel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 20:27:13 by ofadhel           #+#    #+#             */
-/*   Updated: 2024/01/20 22:43:39 by ofadhel          ###   ########.fr       */
+/*   Updated: 2024/01/20 23:53:37 by ofadhel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ class PhoneBook
 		void add();
 		void search();
 		void printContacts();
+		void printIndex(int index);
 };
 
 #endif
