@@ -6,7 +6,7 @@
 /*   By: ofadhel <ofadhel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 19:59:22 by ofadhel           #+#    #+#             */
-/*   Updated: 2024/01/21 00:55:30 by ofadhel          ###   ########.fr       */
+/*   Updated: 2024/01/21 16:09:32 by ofadhel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@
 Account::Account( int initial_deposit )
 {
 	Account::_displayTimestamp();
-	std::cout << "index:" << _nbAccounts << ";amount:" << initial_deposit << ";created" << std::endl;
+	std::cout << "index:" << _nbAccounts << ";amount:"
+		<< initial_deposit << ";created" << std::endl;
 	this->_accountIndex = _nbAccounts;
 	this->_amount = initial_deposit;
 	this->_nbDeposits = 0;
@@ -29,7 +30,8 @@ Account::Account( int initial_deposit )
 Account::~Account( void )
 {
 	Account::_displayTimestamp();
-	std::cout << "index:" << _nbAccounts << ";amount:" << _amount << ";closed" << std::endl;
+	std::cout << "index:" << _nbAccounts << ";amount:"
+		<< _amount << ";closed" << std::endl;
 }
 
 static int		Account::getNbAccounts( void )

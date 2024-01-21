@@ -6,7 +6,7 @@
 /*   By: ofadhel <ofadhel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 20:27:13 by ofadhel           #+#    #+#             */
-/*   Updated: 2024/01/20 23:53:37 by ofadhel          ###   ########.fr       */
+/*   Updated: 2024/01/21 17:00:55 by ofadhel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ class PhoneBook
 	private:
 		Contact contacts[8];
 		int index;
+		int contactCount;
 	public:
 		PhoneBook();
 		~PhoneBook();
