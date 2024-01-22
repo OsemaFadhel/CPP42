@@ -6,13 +6,13 @@
 #    By: ofadhel <ofadhel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/16 20:07:40 by ofadhel           #+#    #+#              #
-#    Updated: 2024/01/22 15:40:23 by ofadhel          ###   ########.fr        #
+#    Updated: 2024/01/22 15:43:30 by ofadhel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = phonebook
 
-SRC = honeBook.cpp main.cpp contact.cpp
+SRC = PhoneBook.cpp main.cpp contact.cpp
 
 FLAGS = -Wall -Wextra -Werror -std=c++98
 
