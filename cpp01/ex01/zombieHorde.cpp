@@ -1,25 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   zombieHorde.cpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ofadhel <ofadhel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/22 18:12:54 by ofadhel           #+#    #+#             */
-/*   Updated: 2024/01/22 19:10:36 by ofadhel          ###   ########.fr       */
+/*   Created: 2024/01/22 18:56:42 by ofadhel           #+#    #+#             */
+/*   Updated: 2024/01/22 19:07:31 by ofadhel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Zombie.hpp"
 
-int main()
+Zombie* zombieHorde( int N, std::string name )
 {
-	int N = 3;
-	Zombie* horde = zombieHorde(N, "marco");
+	Zombie *zombies = new Zombie[N];
 	for (int i = 0; i < N; i++)
-	{
-		horde[i].announce();
-	}
-	delete [] horde;
-	return (0);
+		zombies[i].setName(name);
+	return (zombies);
 }
