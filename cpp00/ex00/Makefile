@@ -6,28 +6,31 @@
 #    By: ofadhel <ofadhel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/16 20:07:09 by ofadhel           #+#    #+#              #
-#    Updated: 2024/01/22 15:41:06 by ofadhel          ###   ########.fr        #
+#    Updated: 2024/01/22 18:12:14 by ofadhel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = megaphone
 
-SRC = megaphone.cpp
+SRCS = megaphone.cpp
 
 FLAGS = -Wall -Wextra -Werror -std=c++98
 
-OBJS 	= $(SRCS:.cpp=.o)
+OBJS	= $(SRCS:.cpp=.o)
+
+CPP		= g++
 
 %.o: %.cpp
-			c++ -c $< -o $@
+			$(CPP) -c $< -o $@
+
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
-		c++ $(FLAGS) $(SRC) -o $(NAME)
+	$(CPP) $(OBJS) $(SRC) -o $(NAME) $(FLAGS)
 
 clean:
-	rm -rf $(NAME)
+	rm -rf $(NAME) $(OBJS)
 
 fclean: clean
 

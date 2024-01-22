@@ -1,22 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   randomChump.cpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ofadhel <ofadhel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/22 15:49:25 by ofadhel           #+#    #+#             */
-/*   Updated: 2024/01/22 18:10:52 by ofadhel          ###   ########.fr       */
+/*   Created: 2024/01/22 15:52:37 by ofadhel           #+#    #+#             */
+/*   Updated: 2024/01/22 18:01:15 by ofadhel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Zombie.hpp"
 
-int	main()
+void randomChump( std::string name )
 {
-	Zombie *zombie = newZombie("FOOv");
-	zombie->announce();
-	randomChump("Zombie");
-	delete zombie;
-	return (0);
+	Zombie zombie = Zombie(name);
+	zombie.announce();
 }

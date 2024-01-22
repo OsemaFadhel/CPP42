@@ -6,28 +6,31 @@
 #    By: ofadhel <ofadhel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/21 00:45:58 by ofadhel           #+#    #+#              #
-#    Updated: 2024/01/21 00:53:10 by ofadhel          ###   ########.fr        #
+#    Updated: 2024/01/22 18:12:46 by ofadhel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = account
 
-SRC = tests.cpp Account.cpp
-
-OBJS 	= $(SRCS:.cpp=.o)
+SRCS = tests.cpp Account.cpp
 
 FLAGS = -Wall -Wextra -Werror -std=c++98
 
+OBJS	= $(SRCS:.cpp=.o)
+
+CPP		= g++
+
 %.o: %.cpp
-			c++ -c $< -o $@
+			$(CPP) -c $< -o $@
+
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	c++ $(OBJS) $(SRC) -o $(NAME) $(FLAGS)
+	$(CPP) $(OBJS) $(SRC) -o $(NAME) $(FLAGS)
 
 clean:
-	rm -rf $(NAME)
+	rm -rf $(NAME) $(OBJS)
 
 fclean: clean
 
