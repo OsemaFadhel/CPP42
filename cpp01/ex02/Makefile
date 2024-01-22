@@ -6,13 +6,13 @@
 #    By: ofadhel <ofadhel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/22 18:11:52 by ofadhel           #+#    #+#              #
-#    Updated: 2024/01/22 18:11:54 by ofadhel          ###   ########.fr        #
+#    Updated: 2024/01/22 19:11:14 by ofadhel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = Brainz
 
-SRCS = main.cpp newZombie.cpp randomChump.cpp Zombie.cpp
+SRCS = $(wildcard *.cpp)
 
 FLAGS = -Wall -Wextra -Werror -std=c++98
 
