@@ -16,6 +16,7 @@
 # include <iostream>
 # include <string>
 # include <iomanip>
+# include <cstdio>
 # include "contactClass.hpp"
 
 class PhoneBook
