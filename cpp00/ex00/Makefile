@@ -6,7 +6,7 @@
 #    By: ofadhel <ofadhel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/16 20:07:09 by ofadhel           #+#    #+#              #
-#    Updated: 2024/01/16 20:07:12 by ofadhel          ###   ########.fr        #
+#    Updated: 2024/01/22 15:41:06 by ofadhel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,10 +16,15 @@ SRC = megaphone.cpp
 
 FLAGS = -Wall -Wextra -Werror -std=c++98
 
+OBJS 	= $(SRCS:.cpp=.o)
+
+%.o: %.cpp
+			c++ -c $< -o $@
+
 all: $(NAME)
 
-$(NAME):
-	c++ $(FLAGS) $(SRC) -o $(NAME)
+$(NAME): $(OBJS)
+		c++ $(FLAGS) $(SRC) -o $(NAME)
 
 clean:
 	rm -rf $(NAME)
