@@ -6,13 +6,13 @@
 /*   By: ofadhel <ofadhel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 16:28:37 by ofadhel           #+#    #+#             */
-/*   Updated: 2024/01/24 18:12:59 by ofadhel          ###   ########.fr       */
+/*   Updated: 2024/01/24 18:32:03 by ofadhel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Fixed.hpp"
 
-Fixed::Fixed()
+Fixed::Fixed() : fixed(0)
 {
 	return ;
 }
