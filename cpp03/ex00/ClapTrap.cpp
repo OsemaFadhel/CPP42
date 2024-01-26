@@ -6,7 +6,7 @@
 /*   By: ofadhel <ofadhel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 14:29:08 by ofadhel           #+#    #+#             */
-/*   Updated: 2024/01/25 17:05:53 by ofadhel          ###   ########.fr       */
+/*   Updated: 2024/01/26 14:32:48 by ofadhel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,3 +49,36 @@ ClapTrap::~ClapTrap()
 	std::cout << "ClapTrap destructor called" << std::endl;
 }
 
+
+void	ClapTrap::attack(const std::string& target)
+{
+	if (hitPoints > 0)
+	{
+		this->hitPoints -= 1;
+		std::cout << "ClapTrap " << this->name << " attack " << target << ", causing " << this->attackDamage << " points of damage!" << std::endl;
+	}
+	else
+		std::cout << "ClapTrap " << this->name << " has no energy" << std::endl;
+}
+
+void	ClapTrap::takeDamage(unsigned int amount)
+{
+	if (hitPoints > 0)
+	{
+		this->hitPoints -= amount;
+		std::cout << "ClapTrap " << this->name << " takes " << amount << " damage!" << std::endl;
+	}
+	else
+		std::cout << "ClapTrap " << this->name << " is dead" << std::endl;
+}
+
+void	ClapTrap::beRepaired(unsigned int amount)
+{
+	if (hitPoints > 0)
+	{
+		this->hitPoints += amount;
+		std::cout << "ClapTrap " << this->name << " is repairing " << amount << " points!" << std::endl;
+	}
+	else
+		std::cout << "ClapTrap " << this->name << " has no energy" << std::endl;
+}
