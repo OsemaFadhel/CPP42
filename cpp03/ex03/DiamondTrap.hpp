@@ -1,28 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   DiamondTrap.hpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ofadhel <ofadhel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/25 14:17:43 by ofadhel           #+#    #+#             */
-/*   Updated: 2024/01/26 15:18:12 by ofadhel          ###   ########.fr       */
+/*   Created: 2024/01/26 15:15:00 by ofadhel           #+#    #+#             */
+/*   Updated: 2024/01/26 15:17:20 by ofadhel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef	DIAMONDTRAP_HPP
+# define DIAMONDTRAP_HPP
+
+#include "ScavTrap.hpp"
 #include "FragTrap.hpp"
 
-int	main()
+class DiamondTrap : public ScavTrap, public FragTrap
 {
-	ClapTrap	ClapTrap("ClapTrap");
-	FragTrap	FragTrap("FragTrap");
+	private:
+		std::string	name;
+	public:
+		DiamondTrap();
+		DiamondTrap(std::string name);
+		DiamondTrap(const DiamondTrap &C);
+		DiamondTrap &operator=(const DiamondTrap &C);
+		~DiamondTrap();
+		void	whoAmI();
+};
 
-	FragTrap.attack("ClapTrap");
-	ClapTrap.attack("FragTrap");
-	ClapTrap.takeDamage(20);
-	FragTrap.takeDamage(20);
-	ClapTrap.beRepaired(10);
-	FragTrap.beRepaired(10);
-	FragTrap.highFivesGuys();
-	return (0);
-}
+#endif

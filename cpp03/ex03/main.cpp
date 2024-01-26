@@ -6,7 +6,7 @@
 /*   By: ofadhel <ofadhel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 14:17:43 by ofadhel           #+#    #+#             */
-/*   Updated: 2024/01/26 15:18:12 by ofadhel          ###   ########.fr       */
+/*   Updated: 2024/01/26 15:11:58 by ofadhel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 int	main()
 {
-	ClapTrap	ClapTrap("ClapTrap");
-	FragTrap	FragTrap("FragTrap");
+	ClapTrap	ClapTrap("Human");
+	FragTrap	FragTrap("Robot");
 
-	FragTrap.attack("ClapTrap");
-	ClapTrap.attack("FragTrap");
+	FragTrap.attack("Human");
+	ClapTrap.attack("Robot");
 	ClapTrap.takeDamage(20);
 	FragTrap.takeDamage(20);
 	ClapTrap.beRepaired(10);

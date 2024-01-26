@@ -1,28 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   FragTrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ofadhel <ofadhel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/25 14:17:43 by ofadhel           #+#    #+#             */
-/*   Updated: 2024/01/26 15:18:12 by ofadhel          ###   ########.fr       */
+/*   Created: 2024/01/26 15:03:06 by ofadhel           #+#    #+#             */
+/*   Updated: 2024/01/26 15:03:53 by ofadhel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "FragTrap.hpp"
+#ifndef	FRAGTRAP_HPP
+# define FRAGTRAP_HPP
 
-int	main()
+#include "ClapTrap.hpp"
+
+class FragTrap : public virtual ClapTrap
 {
-	ClapTrap	ClapTrap("ClapTrap");
-	FragTrap	FragTrap("FragTrap");
+	public:
+		FragTrap();
+		FragTrap(std::string name);
+		FragTrap(const FragTrap &C);
+		FragTrap &operator=(const FragTrap &C);
+		~FragTrap();
+		void	highFivesGuys();
+};
 
-	FragTrap.attack("ClapTrap");
-	ClapTrap.attack("FragTrap");
-	ClapTrap.takeDamage(20);
-	FragTrap.takeDamage(20);
-	ClapTrap.beRepaired(10);
-	FragTrap.beRepaired(10);
-	FragTrap.highFivesGuys();
-	return (0);
-}
+#endif
