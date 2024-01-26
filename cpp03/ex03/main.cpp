@@ -6,23 +6,19 @@
 /*   By: ofadhel <ofadhel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 14:17:43 by ofadhel           #+#    #+#             */
-/*   Updated: 2024/01/26 15:11:58 by ofadhel          ###   ########.fr       */
+/*   Updated: 2024/01/26 16:15:44 by ofadhel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "FragTrap.hpp"
+#include "DiamondTrap.hpp"
 
 int	main()
 {
-	ClapTrap	ClapTrap("Human");
-	FragTrap	FragTrap("Robot");
+	DiamondTrap	DiamondTrap("Diamond");
 
-	FragTrap.attack("Human");
-	ClapTrap.attack("Robot");
-	ClapTrap.takeDamage(20);
-	FragTrap.takeDamage(20);
-	ClapTrap.beRepaired(10);
-	FragTrap.beRepaired(10);
-	FragTrap.highFivesGuys();
+	DiamondTrap.whoAmI();
+	DiamondTrap.ScavTrap::attack("Human");
+	DiamondTrap.takeDamage(20);
+	DiamondTrap.beRepaired(10);
 	return (0);
 }

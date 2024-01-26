@@ -6,7 +6,7 @@
 /*   By: ofadhel <ofadhel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 15:03:01 by ofadhel           #+#    #+#             */
-/*   Updated: 2024/01/26 15:09:50 by ofadhel          ###   ########.fr       */
+/*   Updated: 2024/01/26 15:53:26 by ofadhel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 FragTrap::FragTrap()
 {
-	std::cout << "FragTrap Default constructor called" << std::endl;
+	std::cout << "FragTrap constructor called" << std::endl;
 }
 
 FragTrap::FragTrap(std::string name)

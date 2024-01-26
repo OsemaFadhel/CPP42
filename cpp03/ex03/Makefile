@@ -6,7 +6,7 @@
 #    By: ofadhel <ofadhel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/23 19:36:25 by ofadhel           #+#    #+#              #
-#    Updated: 2024/01/23 19:36:27 by ofadhel          ###   ########.fr        #
+#    Updated: 2024/01/26 16:14:07 by ofadhel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = a.out
 
 SRCS = $(wildcard *.cpp)
 
-FLAGS = -Wall -Wextra -Werror -std=c++98
+FLAGS = -Wall -Wextra -Werror -Wshadow -Wno-shadow -std=c++98
 
 OBJS	= $(SRCS:.cpp=.o)
 
