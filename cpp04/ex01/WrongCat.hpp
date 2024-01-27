@@ -1,25 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   WrongWrongCat.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ofadhel <ofadhel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/26 16:24:24 by ofadhel           #+#    #+#             */
-/*   Updated: 2024/01/27 17:16:09 by ofadhel          ###   ########.fr       */
+/*   Created: 2024/01/27 16:03:48 by ofadhel           #+#    #+#             */
+/*   Updated: 2024/01/27 16:08:13 by ofadhel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Animal.hpp"
-#include "Dog.hpp"
-#include "Cat.hpp"
+#ifndef WRONGCAT_HPP
+# define WRONGCAT_HPP
 
-int main()
+#include "WrongAnimal.hpp"
+
+class WrongCat : virtual public WrongAnimal
 {
-	const Animal* j = new Dog();
-	const Animal* i = new Cat();
-	delete j;
-	delete i;
+	public:
+		WrongCat();
+		WrongCat(std::string type);
+		WrongCat(WrongCat const &src);
+		WrongCat &operator=(WrongCat const &src);
+		~WrongCat();
+		void makeSound() const;
+};
 
-	return 0;
-}
+#endif

@@ -1,25 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Animal.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ofadhel <ofadhel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/26 16:24:24 by ofadhel           #+#    #+#             */
-/*   Updated: 2024/01/27 17:16:09 by ofadhel          ###   ########.fr       */
+/*   Created: 2024/01/26 16:27:22 by ofadhel           #+#    #+#             */
+/*   Updated: 2024/01/27 17:25:22 by ofadhel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Animal.hpp"
-#include "Dog.hpp"
-#include "Cat.hpp"
+#ifndef ANIMAL_HPP
+# define ANIMAL_HPP
 
-int main()
+#include <iostream>
+#include <string>
+
+class Animal
 {
-	const Animal* j = new Dog();
-	const Animal* i = new Cat();
-	delete j;
-	delete i;
+	protected:
+		std::string type;
+	public:
+		Animal();
+		Animal(std::string type);
+		Animal(Animal const &src);
+		Animal &operator=(Animal const &src);
+		virtual ~Animal();
+		std::string getType() const;
+		virtual void makeSound() const;
+};
 
-	return 0;
-}
+#endif

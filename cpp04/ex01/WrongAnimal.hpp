@@ -1,25 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   WrongAnimal.hpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ofadhel <ofadhel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/26 16:24:24 by ofadhel           #+#    #+#             */
-/*   Updated: 2024/01/27 17:16:09 by ofadhel          ###   ########.fr       */
+/*   Created: 2024/01/27 16:02:48 by ofadhel           #+#    #+#             */
+/*   Updated: 2024/01/27 16:09:11 by ofadhel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Animal.hpp"
-#include "Dog.hpp"
-#include "Cat.hpp"
+#ifndef WRONGANIMAL_HPP
+# define WRONGANIMAL_HPP
 
-int main()
+#include <iostream>
+#include <string>
+
+class WrongAnimal
 {
-	const Animal* j = new Dog();
-	const Animal* i = new Cat();
-	delete j;
-	delete i;
+	protected:
+		std::string type;
+	public:
+		WrongAnimal();
+		WrongAnimal(std::string type);
+		WrongAnimal(WrongAnimal const &src);
+		WrongAnimal &operator=(WrongAnimal const &src);
+		~WrongAnimal();
+		std::string getType() const;
+		void makeSound() const;
+};
 
-	return 0;
-}
+#endif

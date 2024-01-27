@@ -1,25 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Dog.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ofadhel <ofadhel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/26 16:24:24 by ofadhel           #+#    #+#             */
-/*   Updated: 2024/01/27 17:16:09 by ofadhel          ###   ########.fr       */
+/*   Created: 2024/01/26 16:53:40 by ofadhel           #+#    #+#             */
+/*   Updated: 2024/01/27 17:20:35 by ofadhel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef Dog_HPP
+# define Dog_HPP
+
 #include "Animal.hpp"
-#include "Dog.hpp"
-#include "Cat.hpp"
+#include "Brain.hpp"
 
-int main()
+class Dog : virtual public Animal
 {
-	const Animal* j = new Dog();
-	const Animal* i = new Cat();
-	delete j;
-	delete i;
+	private:
+		Brain *brain;
+	public:
+		Dog();
+		Dog(std::string type);
+		Dog(Dog const &src);
+		Dog &operator=(Dog const &src);
+		~Dog();
+		void makeSound() const override;
+};
 
-	return 0;
-}
+#endif
