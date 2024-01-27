@@ -6,7 +6,7 @@
 /*   By: ofadhel <ofadhel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 18:04:05 by ofadhel           #+#    #+#             */
-/*   Updated: 2024/01/26 18:04:23 by ofadhel          ###   ########.fr       */
+/*   Updated: 2024/01/27 16:00:00 by ofadhel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ Dog::Dog() : Animal("Dog")
 	std::cout << "Dog constructor called" << std::endl;
 }
 
-Dog::Dog(std::string type) : Animal(type)
+Dog::Dog(std::string type) : Animal("Dog")
 {
 	std::cout << "Dog constructor called" << std::endl;
 }
@@ -39,4 +39,9 @@ Dog &Dog::operator=(Dog const &src)
 Dog::~Dog()
 {
 	std::cout << "Dog destructor called" << std::endl;
+}
+
+void Dog::makeSound() const
+{
+	std::cout << "Bark" << std::endl;
 }
