@@ -6,7 +6,7 @@
 /*   By: ofadhel <ofadhel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 19:36:34 by ofadhel           #+#    #+#             */
-/*   Updated: 2024/01/23 19:59:23 by ofadhel          ###   ########.fr       */
+/*   Updated: 2024/01/30 17:59:09 by ofadhel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,18 @@ int	main(int ac, char **av)
 		std::cout << "Error: could not open file" << std::endl;
 		return (1);
 	}
-	while (ifs)
+	std::string line;
+	while (ifs) // use getline() instead
 	{
-		ifs >> s1;
-		if (s1 == s2)
+		ifs >> line;
+		if (s1 == line)
 			str += s2;
 		else
-			str += s1;
+			str += line;
+		if (line == "\n")
+			str += "\n";
+		else
+			str += " ";
 	}
 	ofs << str;
 	ifs.close();
