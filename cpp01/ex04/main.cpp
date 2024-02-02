@@ -6,7 +6,7 @@
 /*   By: ofadhel <ofadhel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 19:36:34 by ofadhel           #+#    #+#             */
-/*   Updated: 2024/01/30 17:59:09 by ofadhel          ###   ########.fr       */
+/*   Updated: 2024/02/02 15:22:22 by ofadhel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,26 +30,30 @@ int	main(int ac, char **av)
 		std::cout << "Error: could not open file" << std::endl;
 		return (1);
 	}
+	if (ifs.peek() == std::ifstream::traits_type::eof())
+	{
+		std::cout << "Error: file is empty" << std::endl;
+		return (1);
+	}
 	std::string str;
+	std::string line;
+	while (std::getline(ifs, line))
+	{
+		int pos;
+		while ((pos = line.find(s1)) != -1)
+		{
+			line.erase(pos, s1.length());
+			line.insert(pos, s2);
+		}
+		str += line;
+		str += '\n';
+	}
 	filename += ".replace";
 	std::ofstream ofs(filename);
 	if (!ofs)
 	{
-		std::cout << "Error: could not open file" << std::endl;
+		std::cout << "Error: could not create file" << std::endl;
 		return (1);
-	}
-	std::string line;
-	while (ifs) // use getline() instead
-	{
-		ifs >> line;
-		if (s1 == line)
-			str += s2;
-		else
-			str += line;
-		if (line == "\n")
-			str += "\n";
-		else
-			str += " ";
 	}
 	ofs << str;
 	ifs.close();

@@ -5,18 +5,24 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ofadhel <ofadhel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/22 15:49:25 by ofadhel           #+#    #+#             */
-/*   Updated: 2024/02/02 13:58:53 by ofadhel          ###   ########.fr       */
+/*   Created: 2024/01/24 12:12:57 by ofadhel           #+#    #+#             */
+/*   Updated: 2024/02/02 16:59:03 by ofadhel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Zombie.hpp"
+#include "Harl.hpp"
 
-int	main()
+int	main(int argc, char **argv)
 {
-	Zombie *zombie = newZombie("FOOv");
-	zombie->announce();
-	randomChump("Zombie");
-	delete zombie;
+	Harl	harl;
+	std::string	level;
+
+	if (argc == 2)
+		harl.complain(argv[1]);
+	else
+	{
+		std::cout << "ERROR" << std::endl;
+		return (1);
+	}
 	return (0);
 }
