@@ -6,7 +6,7 @@
 /*   By: ofadhel <ofadhel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 16:28:37 by ofadhel           #+#    #+#             */
-/*   Updated: 2024/02/05 14:20:13 by ofadhel          ###   ########.fr       */
+/*   Updated: 2024/02/07 16:10:02 by ofadhel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,25 +104,25 @@ inline bool Fixed::operator!=(const Fixed &f)
 
 Fixed &Fixed::operator+(const Fixed &f)
 {
-	this->fixed = ((this->toFloat() + f.toFloat()) * (1 << this->bits));
+	this->fixed += f.getRawBits();
 	return (*this);
 }
 
 Fixed &Fixed::operator-(const Fixed &f)
 {
-	this->fixed = ((this->toFloat() - f.toFloat()) * (1 << this->bits));
+	this->fixed -= f.getRawBits();
 	return (*this);
 }
 
 Fixed &Fixed::operator*(const Fixed &f)
 {
-	this->fixed = (this->toFloat() * f.toFloat() * (1 << this->bits));
+	this->fixed *= f.getRawBits() / (1 << this->bits);
 	return (*this);
 }
 
 Fixed &Fixed::operator/(const Fixed &f)
 {
-	this->fixed = (this->toFloat() / f.toFloat() * (1 << this->bits));
+	this->fixed /= f.getRawBits() / (1 << this->bits);
 	return (*this);
 }
 
