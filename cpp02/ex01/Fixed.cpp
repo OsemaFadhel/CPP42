@@ -6,7 +6,7 @@
 /*   By: ofadhel <ofadhel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 15:56:10 by ofadhel           #+#    #+#             */
-/*   Updated: 2024/01/24 16:23:44 by ofadhel          ###   ########.fr       */
+/*   Updated: 2024/02/03 13:02:40 by ofadhel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ int Fixed::toInt( void ) const
 {
 	return (this->fixed >> this->bits);
 }
-
 
 std::ostream &operator<<(std::ostream &o, Fixed const &i)
 {
