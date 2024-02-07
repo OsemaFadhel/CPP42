@@ -6,7 +6,7 @@
 /*   By: ofadhel <ofadhel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 15:56:10 by ofadhel           #+#    #+#             */
-/*   Updated: 2024/02/03 13:02:40 by ofadhel          ###   ########.fr       */
+/*   Updated: 2024/02/07 16:13:38 by ofadhel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ Fixed::Fixed()
 Fixed::Fixed(const int n)
 {
 	std::cout << "Int constructor called" << std::endl;
-	this->fixed = n << this->bits;
+	this->fixed = n * (1 << this->bits);
 	return ;
 }
 

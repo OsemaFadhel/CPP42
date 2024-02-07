@@ -6,7 +6,7 @@
 /*   By: ofadhel <ofadhel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 16:28:37 by ofadhel           #+#    #+#             */
-/*   Updated: 2024/02/07 16:10:02 by ofadhel          ###   ########.fr       */
+/*   Updated: 2024/02/07 16:14:24 by ofadhel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ Fixed::Fixed() : fixed(0)
 
 Fixed::Fixed(const int n)
 {
-	this->fixed = n << this->bits;
+	this->fixed = n * (1 << this->bits);
 	return ;
 }
 
