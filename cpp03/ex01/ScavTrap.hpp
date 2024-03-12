@@ -6,7 +6,7 @@
 /*   By: ofadhel <ofadhel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 14:34:32 by ofadhel           #+#    #+#             */
-/*   Updated: 2024/01/26 14:49:45 by ofadhel          ###   ########.fr       */
+/*   Updated: 2024/03/12 21:45:47 by ofadhel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ class ScavTrap : public virtual ClapTrap
 		ScavTrap(const ScavTrap &C);
 		ScavTrap &operator=(const ScavTrap &C);
 		~ScavTrap();
+		void	attack(std::string const & target);
 		void	guardGate();
 };
 
