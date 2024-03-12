@@ -6,7 +6,7 @@
 /*   By: ofadhel <ofadhel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 14:34:44 by ofadhel           #+#    #+#             */
-/*   Updated: 2024/01/26 14:56:06 by ofadhel          ###   ########.fr       */
+/*   Updated: 2024/03/12 22:20:12 by ofadhel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,17 @@ ScavTrap &ScavTrap::operator=(const ScavTrap &C)
 ScavTrap::~ScavTrap()
 {
 	std::cout << "ScavTrap destructor called" << std::endl;
+}
+
+void ScavTrap::attack(std::string const & target)
+{
+	if (energyPoints > 0)
+	{
+		this->energyPoints -= 1;
+		std::cout << "ScavTrap " << this->name << " attack " << target << ", causing " << this->attackDamage << " points of damage!" << std::endl;
+	}
+	else
+		std::cout << "ScavTrap " << this->name << " has no energy" << std::endl;
 }
 
 void ScavTrap::guardGate()
