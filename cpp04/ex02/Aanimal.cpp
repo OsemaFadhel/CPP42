@@ -6,7 +6,7 @@
 /*   By: ofadhel <ofadhel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 16:30:03 by ofadhel           #+#    #+#             */
-/*   Updated: 2024/01/28 17:42:40 by ofadhel          ###   ########.fr       */
+/*   Updated: 2024/03/15 16:06:26 by ofadhel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 Aanimal::Aanimal()
 {
+	this->type = "Aanimal";
 	std::cout << "Aanimal constructor called" << std::endl;
 }
 
@@ -45,8 +46,8 @@ std::string Aanimal::getType() const
 {
 	return (this->type);
 }
-
-/*void Aanimal::makeSound() const
+/*
+void Aanimal::makeSound() const
 {
 	std::cout << "Aanimal sound" <<  std::endl;
 }*/

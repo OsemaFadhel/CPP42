@@ -6,7 +6,7 @@
 /*   By: ofadhel <ofadhel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 16:27:22 by ofadhel           #+#    #+#             */
-/*   Updated: 2024/01/27 15:48:43 by ofadhel          ###   ########.fr       */
+/*   Updated: 2024/03/15 15:54:13 by ofadhel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ class Animal
 		Animal(std::string type);
 		Animal(Animal const &src);
 		Animal &operator=(Animal const &src);
-		~Animal();
+		virtual ~Animal();
 		std::string getType() const;
 		virtual void makeSound() const;
 };

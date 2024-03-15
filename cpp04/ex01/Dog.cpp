@@ -6,7 +6,7 @@
 /*   By: ofadhel <ofadhel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 18:04:05 by ofadhel           #+#    #+#             */
-/*   Updated: 2024/01/27 17:22:47 by ofadhel          ###   ########.fr       */
+/*   Updated: 2024/03/15 16:43:08 by ofadhel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,11 @@ Dog &Dog::operator=(Dog const &src)
 {
 	std::cout << "Dog Assignation operator called" << std::endl;
 	if (this != &src)
+	{
+		delete this->brain;
+		this->brain = new Brain(*src.brain);
 		this->type = src.type;
+	}
 	return (*this);
 }
 
@@ -47,4 +51,14 @@ Dog::~Dog()
 void Dog::makeSound() const
 {
 	std::cout << "Bark" << std::endl;
+}
+
+std::string Dog::getBrainIdea(int i) const
+{
+	return (this->brain->getIdea(i));
+}
+
+void Dog::setBrainIdea(int i, std::string idea)
+{
+	this->brain->setIdea(i, idea);
 }

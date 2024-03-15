@@ -6,7 +6,7 @@
 /*   By: ofadhel <ofadhel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 16:30:03 by ofadhel           #+#    #+#             */
-/*   Updated: 2024/01/26 17:35:38 by ofadhel          ###   ########.fr       */
+/*   Updated: 2024/03/15 16:51:59 by ofadhel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 Animal::Animal()
 {
+	this->type = "Animal";
 	std::cout << "Animal constructor called" << std::endl;
 }
 
@@ -50,3 +51,15 @@ void Animal::makeSound() const
 {
 	std::cout << "Animal sound" <<  std::endl;
 }
+/*
+std::string Animal::getBrainIdea(int i) const
+{
+	(void)i;
+	return ("");
+}
+
+void Animal::setBrainIdea(int i, std::string idea)
+{
+	(void)i;
+	(void)idea;
+}*/

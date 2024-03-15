@@ -6,7 +6,7 @@
 /*   By: ofadhel <ofadhel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 16:50:43 by ofadhel           #+#    #+#             */
-/*   Updated: 2024/01/27 15:49:06 by ofadhel          ###   ########.fr       */
+/*   Updated: 2024/03/15 15:41:52 by ofadhel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 #include "Animal.hpp"
 
-class Cat : virtual public Animal
+class Cat : public Animal
 {
 	public:
 		Cat();
@@ -23,7 +23,7 @@ class Cat : virtual public Animal
 		Cat(Cat const &src);
 		Cat &operator=(Cat const &src);
 		~Cat();
-		void makeSound() const override;
+		void makeSound() const;
 };
 
 #endif

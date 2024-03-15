@@ -6,7 +6,7 @@
 /*   By: ofadhel <ofadhel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 16:43:15 by ofadhel           #+#    #+#             */
-/*   Updated: 2024/01/27 16:47:33 by ofadhel          ###   ########.fr       */
+/*   Updated: 2024/03/15 16:30:43 by ofadhel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,14 @@ Brain &Brain::operator=(Brain const &src)
 Brain::~Brain()
 {
 	std::cout << "Brain destructor called" << std::endl;
+}
+
+std::string Brain::getIdea(int i) const
+{
+	return (this->ideas[i]);
+}
+
+void Brain::setIdea(int i, std::string idea)
+{
+	this->ideas[i] = idea;
 }

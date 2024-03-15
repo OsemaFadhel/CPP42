@@ -6,7 +6,7 @@
 /*   By: ofadhel <ofadhel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 16:14:02 by ofadhel           #+#    #+#             */
-/*   Updated: 2024/01/27 17:24:08 by ofadhel          ###   ########.fr       */
+/*   Updated: 2024/03/15 16:22:12 by ofadhel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ class Brain
 		Brain(Brain const &src);
 		Brain &operator=(Brain const &src);
 		~Brain();
+		std::string getIdea(int i) const;
+		void setIdea(int i, std::string idea);
 };
 
 #endif
