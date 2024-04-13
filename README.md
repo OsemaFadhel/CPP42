@@ -22,25 +22,17 @@ This first module of C++ is designed to help you understand the specifities of t
 
 # cpp01 
 
-<h3 align="center">Description</h3>
-
 This module is designed to help you understand the memory allocation, reference, pointers to members and the usage of the switch in CPP.
 
 # cpp02
-
-<h3 align="center">Description</h3>
 
 This module is designed to help you understand Ad-hoc polymorphism, overloads and orthodox canonical classes in CPP.
 
 # cpp03
 
-<h3 align="center">Description</h3>
-
 This module is designed to help you understand Inheritance in CPP.
 
 # cpp04
-
-<h3 align="center">Description</h3>
 
 This module is designed to help you understand Subtype polymorphism, abstract classes and interfaces in CPP.
 
