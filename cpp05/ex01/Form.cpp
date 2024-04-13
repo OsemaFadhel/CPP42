@@ -6,17 +6,18 @@
 /*   By: ofadhel <ofadhel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 15:53:23 by ofadhel           #+#    #+#             */
-/*   Updated: 2024/04/13 15:59:23 by ofadhel          ###   ########.fr       */
+/*   Updated: 2024/04/13 19:43:08 by ofadhel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Form.hpp"
 
-Form::Form(std::string const name, int grade) : _name(name), _grade(grade)
+Form::Form(std::string const name, int gradetoSign, int gradeToExecute) : _name(name), _gradeToSign(gradetoSign), _gradeToExecute(gradeToExecute)
 {
-	if (grade < 1)
+	_signed = false;
+	if (gradetoSign < 1 || gradeToExecute < 1)
 		throw GradeTooHighException();
-	else if (grade > 150)
+	else if (gradetoSign > 150 || gradeToExecute > 150)
 		throw GradeTooLowException();
 }
 
@@ -31,7 +32,10 @@ Form::Form(Form const &src)
 
 Form &Form::operator=(Form const &src)
 {
-	_grade = src.getGrade();
+	if (this != &src)
+	{
+		_signed = src._signed;
+	}
 	return (*this);
 }
 
@@ -40,26 +44,22 @@ std::string Form::getName() const
 	return (_name);
 }
 
-int Form::getGrade() const
-{
-	return (_grade);
-}
+bool getSigned() const
+{}
 
-void Form::incrementGrade()
-{
-	if (_grade - 1 < 1)
-		throw GradeTooHighException();
-	else
-		_grade--;
-}
+int getGradeToSign() const
+{}
 
-void Form::decrementGrade()
-{
-	if (_grade + 1 > 150)
-		throw GradeTooLowException();
-	else
-		_grade++;
-}
+int getGradeToExecute() const
+{}
+
+void beSigned(Form &b)
+{}
+
+
+void signForm()
+{}
+
 
 const char *Form::GradeTooHighException::what() const throw()
 {
