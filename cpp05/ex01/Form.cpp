@@ -6,7 +6,7 @@
 /*   By: ofadhel <ofadhel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 15:53:23 by ofadhel           #+#    #+#             */
-/*   Updated: 2024/04/13 19:43:08 by ofadhel          ###   ########.fr       */
+/*   Updated: 2024/05/02 19:58:39 by ofadhel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,22 +44,28 @@ std::string Form::getName() const
 	return (_name);
 }
 
-bool getSigned() const
-{}
+bool Form::getSigned() const
+{
+	return (_signed);
+}
 
-int getGradeToSign() const
-{}
+int Form::getGradeToSign() const
+{
+	return (_gradeToSign);
+}
 
-int getGradeToExecute() const
-{}
+int Form::getGradeToExecute() const
+{
+	return (_gradeToExecute);
+}
 
-void beSigned(Form &b)
-{}
-
-
-void signForm()
-{}
-
+void Form::beSigned(Bureaucrat &b)
+{
+	if(b.getGrade() <= _gradeToSign)
+		_signed = true;
+	else
+		throw Grade	TooLowException();
+}
 
 const char *Form::GradeTooHighException::what() const throw()
 {
