@@ -6,7 +6,7 @@
 /*   By: ofadhel <ofadhel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 18:21:26 by ofadhel           #+#    #+#             */
-/*   Updated: 2024/04/22 15:13:54 by ofadhel          ###   ########.fr       */
+/*   Updated: 2024/06/09 16:32:55 by ofadhel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ class Bureaucrat
 		int getGrade() const;
 		void incrementGrade();
 		void decrementGrade();
-		void signForm(Form &f)
+		void signForm(Form &f);
 		class GradeTooHighException : public std::exception
 		{
 			public:

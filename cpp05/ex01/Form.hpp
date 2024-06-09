@@ -6,7 +6,7 @@
 /*   By: ofadhel <ofadhel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 15:53:26 by ofadhel           #+#    #+#             */
-/*   Updated: 2024/05/02 20:00:23 by ofadhel          ###   ########.fr       */
+/*   Updated: 2024/06/09 16:45:32 by ofadhel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ class Form
 		int getGradeToSign() const;
 		int getGradeToExecute() const;
 		void beSigned(Bureaucrat &b);
-		
+
 		class GradeTooHighException : public std::exception
 		{
 			public:

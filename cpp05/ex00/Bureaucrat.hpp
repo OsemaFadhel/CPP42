@@ -6,7 +6,7 @@
 /*   By: ofadhel <ofadhel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 18:21:26 by ofadhel           #+#    #+#             */
-/*   Updated: 2024/04/13 15:52:08 by ofadhel          ###   ########.fr       */
+/*   Updated: 2024/06/07 16:50:59 by ofadhel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,13 @@ class Bureaucrat
 		~Bureaucrat();
 		Bureaucrat(Bureaucrat const &src);
 		Bureaucrat &operator=(Bureaucrat const &src);
+
 		std::string getName() const;
 		int getGrade() const;
+
 		void incrementGrade();
 		void decrementGrade();
+
 		class GradeTooHighException : public std::exception
 		{
 			public:

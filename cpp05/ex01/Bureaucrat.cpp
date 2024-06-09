@@ -6,7 +6,7 @@
 /*   By: ofadhel <ofadhel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 18:21:18 by ofadhel           #+#    #+#             */
-/*   Updated: 2024/05/02 20:01:35 by ofadhel          ###   ########.fr       */
+/*   Updated: 2024/06/09 16:41:51 by ofadhel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,15 @@ void Bureaucrat::decrementGrade()
 
 void Bureaucrat::signForm(Form &f)
 {
-	if (f.getSigned == true)
+	try
+	{
+		f.beSigned(*this);
 		std::cout << _name << " signed " << f.getName() << std::endl;
-	else
-		std::cout << _name << " couldn’t sign " << f.getName() << " because " << "IDK" << std::endl;
+	}
+	catch (std::exception &e)
+	{
+		std::cout << _name << " couldn’t sign " << f.getName() << " because " << e.what() << std::endl;
+	}
 }
 
 const char *Bureaucrat::GradeTooHighException::what() const throw()

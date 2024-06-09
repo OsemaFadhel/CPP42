@@ -6,7 +6,7 @@
 /*   By: ofadhel <ofadhel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 15:53:23 by ofadhel           #+#    #+#             */
-/*   Updated: 2024/05/02 19:58:39 by ofadhel          ###   ########.fr       */
+/*   Updated: 2024/06/09 16:49:40 by ofadhel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,17 +25,14 @@ Form::~Form()
 {
 }
 
-Form::Form(Form const &src)
+Form::Form(Form const &src) : _name(src._name), _signed(src._signed) ,_gradeToSign(src._gradeToSign), _gradeToExecute(src._gradeToExecute)
 {
-	*this = src;
 }
 
 Form &Form::operator=(Form const &src)
 {
 	if (this != &src)
-	{
 		_signed = src._signed;
-	}
 	return (*this);
 }
 
@@ -64,7 +61,7 @@ void Form::beSigned(Bureaucrat &b)
 	if(b.getGrade() <= _gradeToSign)
 		_signed = true;
 	else
-		throw Grade	TooLowException();
+		throw GradeTooLowException();
 }
 
 const char *Form::GradeTooHighException::what() const throw()
@@ -79,6 +76,6 @@ const char *Form::GradeTooLowException::what() const throw()
 
 std::ostream &operator<<(std::ostream &out, Form const &src)
 {
-	out << src.getName() << ", Form grade " << src.getGrade();
+	out << src.getName() << ", Form grade to sign: " << src.getGradeToSign() << ", Form grade to execute: " << src.getGradeToExecute() << ", Form is signed: " << src.getSigned();
 	return (out);
 }
