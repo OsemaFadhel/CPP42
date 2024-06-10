@@ -6,7 +6,7 @@
 /*   By: ofadhel <ofadhel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 18:05:30 by ofadhel           #+#    #+#             */
-/*   Updated: 2024/06/09 18:09:11 by ofadhel          ###   ########.fr       */
+/*   Updated: 2024/06/10 15:23:10 by ofadhel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 #include <fstream>
 #include "AForm.hpp"
 
-class ShrubberyCreationForm
+class ShrubberyCreationForm : public AForm
 {
 	private:
 		std::string	_target;

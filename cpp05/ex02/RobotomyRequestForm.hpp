@@ -6,7 +6,7 @@
 /*   By: ofadhel <ofadhel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 18:07:08 by ofadhel           #+#    #+#             */
-/*   Updated: 2024/06/09 18:09:15 by ofadhel          ###   ########.fr       */
+/*   Updated: 2024/06/10 14:43:56 by ofadhel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 #include <fstream>
 #include "AForm.hpp"
 
-class RobotomyRequestForm
+class RobotomyRequestForm : public AForm
 {
 	private:
 		std::string	_target;

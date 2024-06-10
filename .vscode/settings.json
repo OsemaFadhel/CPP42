@@ -71,6 +71,8 @@
 		"random": "cpp",
 		"fstream": "cpp",
 		"ranges": "cpp",
-		"numbers": "cpp"
-	}
+		"numbers": "cpp",
+		"span": "cpp"
+	},
+	"C_Cpp.errorSquiggles": "disabled"
 }

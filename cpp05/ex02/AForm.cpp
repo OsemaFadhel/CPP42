@@ -6,7 +6,7 @@
 /*   By: ofadhel <ofadhel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 15:53:23 by ofadhel           #+#    #+#             */
-/*   Updated: 2024/06/09 18:16:39 by ofadhel          ###   ########.fr       */
+/*   Updated: 2024/06/10 15:20:26 by ofadhel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,12 +64,9 @@ void AForm::beSigned(Bureaucrat &b)
 		throw GradeTooLowException();
 }
 
-void AForm::execute(Bureaucrat const &executor) const
+const char *AForm::FormNotSignedException::what() const throw()
 {
-	if (executor.getGrade() > _gradeToExecute)
-		throw GradeTooLowException();
-	if (!_signed)
-		throw FormNotSignedException();
+	return ("Form is not signed");
 }
 
 const char *AForm::GradeTooHighException::what() const throw()

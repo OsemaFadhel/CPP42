@@ -6,7 +6,7 @@
 /*   By: ofadhel <ofadhel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 18:07:21 by ofadhel           #+#    #+#             */
-/*   Updated: 2024/06/09 18:09:50 by ofadhel          ###   ########.fr       */
+/*   Updated: 2024/06/10 15:15:39 by ofadhel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 #include <fstream>
 #include "AForm.hpp"
 
-class PresidentialPardonForm
+class PresidentialPardonForm : public AForm
 {
 	private:
 		std::string	_target;

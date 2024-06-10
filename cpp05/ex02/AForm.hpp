@@ -6,7 +6,7 @@
 /*   By: ofadhel <ofadhel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 15:53:26 by ofadhel           #+#    #+#             */
-/*   Updated: 2024/06/09 18:14:24 by ofadhel          ###   ########.fr       */
+/*   Updated: 2024/06/10 15:22:45 by ofadhel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,13 @@ class AForm
 		int getGradeToExecute() const;
 		void beSigned(Bureaucrat &b);
 
-		void execute(Bureaucrat const &executor) const;
+		virtual void execute(Bureaucrat const &executor) const = 0;
+
+		class FormNotSignedException : public std::exception
+		{
+			public:
+				virtual const char *what() const throw();
+		};
 
 		class GradeTooHighException : public std::exception
 		{
