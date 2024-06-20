@@ -6,7 +6,7 @@
 /*   By: ofadhel <ofadhel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 11:10:28 by ofadhel           #+#    #+#             */
-/*   Updated: 2024/06/19 11:50:28 by ofadhel          ###   ########.fr       */
+/*   Updated: 2024/06/20 12:45:41 by ofadhel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,33 +33,39 @@ Intern &Intern::operator=(Intern const &src)
 
 AForm *Intern::makeForm(std::string formName, std::string target)
 {
-	std::string names[3] = { "shrubbery creation",
-								"robotomy request",
-								"presidential pardon" };
+	std::string formTypes[3] = {"shrubbery creation", "robotomy request", "presidential pardon"};
+
+	AForm *(Intern::*FormCreator[3])(const std::string &target) = {
+		&Intern::createShrubberyCreationForm,
+		&Intern::createRobotomyRequestForm,
+		&Intern::createPresidentialPardonForm
+	};
 
 	for (int i = 0; i < 3; i++)
 	{
-		if (names[i] == formName)
+		if (formName == formTypes[i])
 		{
 			std::cout << "Intern creates " << formName << std::endl;
-			return (formCreators[i](target));
+			return (this->*FormCreator[i])(target);
 		}
 	}
-	std::cout << "Intern can't create " << formName << " because it doesn't exist" << std::endl;
+
+	if (formName != formTypes[0] && formName != formTypes[1] && formName != formTypes[2])
+		throw std::invalid_argument("Invalid form name");
 	return (NULL);
 }
 
-AForm *Intern::createShrubberyCreationForm(std::string target)
+AForm *Intern::createShrubberyCreationForm(const std::string &target)
 {
-	return (new ShrubberyCreationForm(target));
+	return new ShrubberyCreationForm(target);
 }
 
-AForm *Intern::createRobotomyRequestForm(std::string target)
+AForm *Intern::createRobotomyRequestForm(const std::string &target)
 {
-	return (new RobotomyRequestForm(target));
+	return new RobotomyRequestForm(target);
 }
 
-AForm *Intern::createPresidentialPardonForm(std::string target)
+AForm *Intern::createPresidentialPardonForm(const std::string &target)
 {
-	return (new PresidentialPardonForm(target));
+	return new PresidentialPardonForm(target);
 }
