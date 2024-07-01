@@ -14,13 +14,13 @@ This will be the starting point of your C++ journey
 | Object-oriented programming | Imperative programming |
 | OOP | Rigor |
 
-# cpp00 
+# cpp00
 
 <h3 align="center">Description</h3>
 
 This first module of C++ is designed to help you understand the specifities of the language when compared to C. Time to dive into Object Oriented Programming!
 
-# cpp01 
+# cpp01
 
 This module is designed to help you understand the memory allocation, reference, pointers to members and the usage of the switch in CPP.
 
@@ -36,4 +36,6 @@ This module is designed to help you understand Inheritance in CPP.
 
 This module is designed to help you understand Subtype polymorphism, abstract classes and interfaces in CPP.
 
+# cpp05
 
+This module is designed to help you understand Try/Catch and Exceptions in CPP.

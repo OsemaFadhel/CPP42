@@ -6,7 +6,7 @@
 /*   By: ofadhel <ofadhel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 16:39:07 by ofadhel           #+#    #+#             */
-/*   Updated: 2024/04/26 16:39:07 by ofadhel          ###   ########.fr       */
+/*   Updated: 2024/07/01 10:05:55 by ofadhel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,17 @@ void ScalarConverter::printChar()
 	std::cout << "char: ";
 	try
 	{
-		int i = std::stoi(_input);
+		char c = std::stoi(_input);
+		if (std::isprint(c))
+			std::cout << "'" << c << "'";
+		else
+			std::cout << "Non displayable";
 	}
-	...
+	catch (std::exception &e)
+	{
+		std::cout << "impossible" << std::endl;
+		return;
+	}
 }
 
 void ScalarConverter::printInt()
@@ -71,8 +79,16 @@ void ScalarConverter::printInt()
 	try
 	{
 		int i = std::stoi(_input);
+		if (i > std::numeric_limits<int>::max() || i < std::numeric_limits<int>::min())
+			std::cout << "impossible";
+		else
+			std::cout << i;
 	}
-	...
+	catch (std::exception &e)
+	{
+		std::cout << "impossible";
+	}
+	std::endl;
 }
 
 void ScalarConverter::printFloat()
@@ -83,6 +99,7 @@ void ScalarConverter::printFloat()
 		float f = std::stof(_input);
 	}
 	...
+	std::endl;
 }
 
 void ScalarConverter::printDouble()
@@ -93,4 +110,5 @@ void ScalarConverter::printDouble()
 		double d = std::stod(_input);
 	}
 	...
+	std::endl;
 }
