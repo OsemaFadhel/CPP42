@@ -6,7 +6,7 @@
 /*   By: ofadhel <ofadhel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 16:34:30 by ofadhel           #+#    #+#             */
-/*   Updated: 2024/04/26 16:34:30 by ofadhel          ###   ########.fr       */
+/*   Updated: 2024/07/01 10:43:35 by ofadhel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ class ScalarConverter
 {
 	private:
 		std::string _input;
+		int _type;
 	public:
 		ScalarConverter();
 		ScalarConverter(std::string input);
@@ -37,6 +38,7 @@ class ScalarConverter
 		void printInt();
 		void printFloat();
 		void printDouble();
+		void findtype();
 };
 
 #endif
