@@ -6,7 +6,7 @@
 /*   By: ofadhel <ofadhel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 16:34:30 by ofadhel           #+#    #+#             */
-/*   Updated: 2024/07/12 12:37:23 by ofadhel          ###   ########.fr       */
+/*   Updated: 2024/07/12 12:38:56 by ofadhel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,10 @@ class ScalarConverter
 
 		void convert();
 
-		void printChar();
-		void printInt();
-		void printFloat();
-		void printDouble();
+		void printChar(char c);
+		void printInt(int i);
+		void printFloat(float f);
+		void printDouble(double d);
 
 		static bool isSpecialFloat(float f);
 		static bool isSpecialDouble(double d);
