@@ -6,7 +6,7 @@
 /*   By: ofadhel <ofadhel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 16:34:30 by ofadhel           #+#    #+#             */
-/*   Updated: 2024/07/01 10:43:35 by ofadhel          ###   ########.fr       */
+/*   Updated: 2024/07/12 12:37:23 by ofadhel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 # include <iomanip>
 # include <limits>
 # include <cmath>
+# include <cstdlib>
+# include <cstdlib>
 
 class ScalarConverter
 {
@@ -31,14 +33,17 @@ class ScalarConverter
 		ScalarConverter &operator=(ScalarConverter const &src);
 		~ScalarConverter();
 
-		void setInput(std::string input);
-		std::string getInput() const;
+		void findtype();
+
 		void convert();
+
 		void printChar();
 		void printInt();
 		void printFloat();
 		void printDouble();
-		void findtype();
+
+		static bool isSpecialFloat(float f);
+		static bool isSpecialDouble(double d);
 };
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: ofadhel <ofadhel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 16:39:07 by ofadhel           #+#    #+#             */
-/*   Updated: 2024/07/01 10:45:53 by ofadhel          ###   ########.fr       */
+/*   Updated: 2024/07/12 12:37:07 by ofadhel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,73 +50,121 @@ std::string ScalarConverter::getInput() const
 
 void ScalarConverter::findtype()
 {
-	if (_input.length() == 1 && !std::isdigit(_input[0]))
+	// Check if the input is a char
+	if (_input.length() == 1 && !std::isdigit(_input[0])) {
 		_type = 0;
-	else if (_input )
+		return;
+	}
+
+	// Check if the input is an int
+	char *end;
+	long value = std::strtol(_input.c_str(), &end, 10);
+	if (*end == '\0' && value >= std::numeric_limits<int>::min() && value <= std::numeric_limits<int>::max()) {
+		_type = 1;
+		return;
+	}
+
+	// Check if the input is a float
+	float fvalue = std::strtof(_input.c_str(), &end);
+	if (*end == 'f' && *(end + 1) == '\0') {
+		_type = 2;
+		return;
+	}
+
+	// Check if the input is a double
+	double dvalue = std::strtod(_input.c_str(), &end);
+	if (*end == '\0') {
+		_type = 3;
+		return;
+	}
+
+	_type = -1;
 }
 
 void ScalarConverter::convert()
 {
-	printChar();
-	printInt();
-	printFloat();
-	printDouble();
+	findtype();
+	switch (_type) {
+		case 0:
+		{
+			char c = _input[0];
+			printChar(c);
+			printInt(static_cast<int>(c));
+			printFloat(static_cast<float>(c));
+			printDouble(static_cast<double>(c));
+			break;
+		}
+		case 1:
+		{
+			int i = std::atoi(_input.c_str());
+			printChar(static_cast<char>(i));
+			printInt(i);
+			printFloat(static_cast<float>(i));
+			printDouble(static_cast<double>(i));
+			break;
+		}
+		case 2:
+		{
+			float f = std::strtof(_input.c_str(), NULL);
+			printChar(static_cast<char>(f));
+			printInt(static_cast<int>(f));
+			printFloat(f);
+			printDouble(static_cast<double>(f));
+			break;
+		}
+		case 3:
+		{
+			double d = std::strtod(_input.c_str(), NULL);
+			printChar(static_cast<char>(d));
+			printInt(static_cast<int>(d));
+			printFloat(static_cast<float>(d));
+			printDouble(d);
+			break;
+		}
+		default:
+			std::cout << "char: impossible" << std::endl;
+			std::cout << "int: impossible" << std::endl;
+			std::cout << "float: impossible" << std::endl;
+			std::cout << "double: impossible" << std::endl;
+			break;
+	}
 }
 
 void ScalarConverter::printChar()
 {
-	std::cout << "char: ";
-	try
-	{
-		if (_input.length() > 1 && !std::isdigit(_input[0])
-		{
-			std::cout << "'" << _input << "'";
-			return;
-		}
-	}
-	catch (std::exception &e)
-	{
-		std::cout << "impossible" << std::endl;
-		return;
-	}
+	if (std::isprint(c))
+		std::cout << "char: '" << c << "'" << std::endl;
+	else
+		std::cout << "char: Non displayable" << std::endl;
 }
 
 void ScalarConverter::printInt()
 {
-	std::cout << "int: ";
-	try
-	{
-		int i = std::stoi(_input);
-		if (i > std::numeric_limits<int>::max() || i < std::numeric_limits<int>::min())
-			std::cout << "impossible";
-		else
-			std::cout << i;
-	}
-	catch (std::exception &e)
-	{
-		std::cout << "impossible";
-	}
-	std::endl;
+	std::cout << "int: " << i << std::endl;
 }
 
-void ScalarConverter::printFloat()
-{
-	std::cout << "float: ";
-	try
-	{
-		float f = std::stof(_input);
-	}
-	...
-	std::endl;
+void ScalarConverter::printFloat(float f) {
+	if (isSpecialFloat(f))
+		std::cout << "float: " << f << "f" << std::endl;
+	else
+		std::cout << "float: " << f << "f" << std::endl;
 }
 
-void ScalarConverter::printDouble()
-{
-	std::cout << "double: ";
-	try
-	{
-		double d = std::stod(_input);
-	}
-	...
-	std::endl;
+void ScalarConverter::printDouble(double d) {
+	if (isSpecialDouble(d))
+	std::cout << "double: " << d << std::endl;
+	else
+		std::cout << "double: " << d << std::endl;
+}
+
+bool ScalarConverter::isSpecialFloat(float f) {
+	return f == std::numeric_limits<float>::infinity() ||
+			f == -std::numeric_limits<float>::infinity() ||
+			f != f;
+}
+
+bool ScalarConverter::isSpecialDouble(double d) {
+	return d == std::numeric_limits<double>::infinity() ||
+			d == -std::numeric_limits<double>::infinity() ||
+			d != d;
 }
