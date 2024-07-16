@@ -6,7 +6,7 @@
 /*   By: ofadhel <ofadhel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 16:39:07 by ofadhel           #+#    #+#             */
-/*   Updated: 2024/07/12 12:53:31 by ofadhel          ###   ########.fr       */
+/*   Updated: 2024/07/16 15:03:10 by ofadhel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,14 +153,14 @@ void ScalarConverter::printFloat(float f) {
 	if (isSpecialFloat(f))
 		std::cout << "float: " << f << "f" << std::endl;
 	else
-		std::cout << "float: " << f << "f" << std::endl;
+		std::cout << "float: " <<  std::fixed << std::setprecision(floor(f) == f ? 1 : 6) << f << "f" << std::endl;
 }
 
 void ScalarConverter::printDouble(double d) {
 	if (isSpecialDouble(d))
 	std::cout << "double: " << d << std::endl;
 	else
-		std::cout << "double: " << d << std::endl;
+		std::cout << "double: " << std::fixed << std::setprecision(floor(d) == d ? 1 : 6) << d << std::endl;
 }
 
 bool ScalarConverter::isSpecialFloat(float f) {
