@@ -6,7 +6,7 @@
 /*   By: ofadhel <ofadhel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 14:56:17 by ofadhel           #+#    #+#             */
-/*   Updated: 2024/07/17 15:07:45 by ofadhel          ###   ########.fr       */
+/*   Updated: 2024/07/21 22:09:08 by ofadhel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,12 @@ int main() {
 			arr2[i] = i * 10;
 			std::cout << "arr2[" << i << "]: " << arr2[i] << std::endl;
 		}
-		try {
+		try
+		{
 			std::cout << arr2[10] << std::endl;
-		} catch (const std::out_of_range& e) {
+		}
+		catch (const std::exception& e)
+		{
 			std::cout << "Exception caught: " << e.what() << std::endl;
 		}
 	} catch (const std::exception& e) {
