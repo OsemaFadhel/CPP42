@@ -5,42 +5,27 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ofadhel <ofadhel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/17 14:47:41 by ofadhel           #+#    #+#             */
-/*   Updated: 2024/07/22 16:24:46 by ofadhel          ###   ########.fr       */
+/*   Created: 2024/07/22 16:25:38 by ofadhel           #+#    #+#             */
+/*   Updated: 2024/07/22 18:11:55 by ofadhel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "iter.hpp"
-
-void printInt(int &x)
-{
-	std::cout << x << std::endl;
-}
-
-void printDouble(double &x)
-{
-	std::cout << x << std::endl;
-}
-
-void printString(std::string &x)
-{
-	std::cout << x << std::endl;
-}
+#include "Span.hpp"
 
 int main()
 {
-	int intArray[] = {1, 2, 3, 4, 5};
-	double doubleArray[] = {1.1, 2.2, 3.3, 4.4, 5.5};
-	std::string stringArray[] = {"Hello", "World", "!"};
+	Span sp = Span(5);
 
-	std::cout << "Integer Array:" << std::endl;
-	iter(intArray, 5, printInt);
+	sp.addNumber(6);
+	sp.addNumber(3);
+	sp.addNumber(17);
+	sp.addNumber(9);
+	sp.addNumber(11);
 
-	std::cout << "Double Array:" << std::endl;
-	iter(doubleArray, 5, printDouble);
+	std::cout << sp.shortestSpan() << std::endl;
+	std::cout << sp.longestSpan() << std::endl;
 
-	std::cout << "String Array:" << std::endl;
-	iter(stringArray, 3, printString);
-
+	std::cout << "extra test addnumber" << std::endl;
+	
 	return 0;
 }
