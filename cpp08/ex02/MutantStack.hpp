@@ -6,7 +6,7 @@
 /*   By: ofadhel <ofadhel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 18:26:32 by ofadhel           #+#    #+#             */
-/*   Updated: 2024/07/25 15:24:05 by ofadhel          ###   ########.fr       */
+/*   Updated: 2024/07/25 15:32:20 by ofadhel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ class MutantStack : public std::stack<T>
 		typedef typename std::stack<T>::container_type::iterator iterator;
 
 		iterator begin() { return std::stack<T>::c.begin(); }
-
 		iterator end() { return std::stack<T>::c.end(); }
 };
 
