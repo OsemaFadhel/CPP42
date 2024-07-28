@@ -6,11 +6,11 @@
 #    By: ofadhel <ofadhel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/23 19:36:25 by ofadhel           #+#    #+#              #
-#    Updated: 2024/07/12 12:51:50 by ofadhel          ###   ########.fr        #
+#    Updated: 2024/07/28 15:31:44 by ofadhel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = a.out
+NAME = btc
 
 SRCS = $(wildcard *.cpp)
 
