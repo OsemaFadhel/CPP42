@@ -6,11 +6,11 @@
 #    By: ofadhel <ofadhel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/23 19:36:25 by ofadhel           #+#    #+#              #
-#    Updated: 2024/07/12 12:51:50 by ofadhel          ###   ########.fr        #
+#    Updated: 2024/07/29 14:45:36 by ofadhel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = a.out
+NAME = RPN
 
 SRCS = $(wildcard *.cpp)
 
