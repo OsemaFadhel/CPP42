@@ -6,7 +6,7 @@
 /*   By: ofadhel <ofadhel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 11:10:28 by ofadhel           #+#    #+#             */
-/*   Updated: 2024/07/30 13:14:41 by ofadhel          ###   ########.fr       */
+/*   Updated: 2024/07/30 15:34:28 by ofadhel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,7 @@ AForm *Intern::makeForm(std::string formName, std::string target)
 		}
 	}
 
-	if (formName != formTypes[0] && formName != formTypes[1] && formName != formTypes[2])
-		throw std::invalid_argument("Invalid form name");
-	return (NULL);
+	throw std::invalid_argument("Invalid form name");
 }
 
 AForm *Intern::createShrubberyCreationForm(const std::string &target)

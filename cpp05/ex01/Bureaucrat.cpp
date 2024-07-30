@@ -6,7 +6,7 @@
 /*   By: ofadhel <ofadhel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 18:21:18 by ofadhel           #+#    #+#             */
-/*   Updated: 2024/07/30 12:14:47 by ofadhel          ###   ########.fr       */
+/*   Updated: 2024/07/30 15:16:15 by ofadhel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,8 @@ void Bureaucrat::signForm(Form &f)
 	}
 	catch (std::exception &e)
 	{
-		std::cout << *this << " couldn’t sign " << f << " because " << e.what() << std::endl;
+		std::cout << *this << " couldn’t sign " << f << " because ";
+		throw;
 	}
 }
 

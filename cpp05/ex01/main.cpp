@@ -6,7 +6,7 @@
 /*   By: ofadhel <ofadhel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 18:20:59 by ofadhel           #+#    #+#             */
-/*   Updated: 2024/07/30 12:10:10 by ofadhel          ###   ########.fr       */
+/*   Updated: 2024/07/30 15:07:28 by ofadhel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,16 @@ int	main()
 		std::cout << b2 << std::endl;
 		std::cout << f1 << std::endl;
 		std::cout << f2 << std::endl;
+		std::cout << std::endl;
 
+		b2.signForm(f2);
 		b1.signForm(f1);
 		b2.signForm(f2);
 
 		std::cout << f1 << std::endl;
 		std::cout << f2 << std::endl;
 
-	} catch (std::exception& e) {
+	} catch (const std::exception& e) {
 		std::cout << e.what() << std::endl;
 	}
 	return 0;
