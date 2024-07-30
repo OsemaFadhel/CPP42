@@ -6,7 +6,7 @@
 /*   By: ofadhel <ofadhel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 18:21:18 by ofadhel           #+#    #+#             */
-/*   Updated: 2024/06/20 12:43:08 by ofadhel          ###   ########.fr       */
+/*   Updated: 2024/07/30 12:39:35 by ofadhel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,11 +66,11 @@ void Bureaucrat::signForm(AForm &f)
 	try
 	{
 		f.beSigned(*this);
-		std::cout << _name << " signed " << f.getName() << std::endl;
+		std::cout << *this << " signed " << f << std::endl;
 	}
 	catch (std::exception &e)
 	{
-		std::cout << _name << " couldn’t sign " << f.getName() << " because " << e.what() << std::endl;
+		std::cout << *this << " couldn’t sign " << f << " because " << e.what() << std::endl;
 	}
 }
 
@@ -79,11 +79,11 @@ void Bureaucrat::executeForm(AForm const & form)
 	try
 	{
 		form.execute(*this);
-		std::cout << _name << " executed " << form.getName() << std::endl;
+		std::cout << *this << " executed " << form << std::endl;
 	}
 	catch (std::exception &e)
 	{
-		std::cout << _name << " couldn’t execute " << form.getName() << " because " << e.what() << std::endl;
+		std::cout << *this << " couldn’t execute " << form << " because " << e.what() << std::endl;
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: ofadhel <ofadhel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 18:20:59 by ofadhel           #+#    #+#             */
-/*   Updated: 2024/06/09 16:56:04 by ofadhel          ###   ########.fr       */
+/*   Updated: 2024/07/30 12:10:10 by ofadhel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	main()
 {
 	try {
 		Bureaucrat b1("Alice", 2);
-		Bureaucrat b2("Bob", 150);
+		Bureaucrat b2("Bob", 145);
 
 		Form f1("Form1", 1, 50);
 		Form f2("Form2", 150, 150);

@@ -6,7 +6,7 @@
 /*   By: ofadhel <ofadhel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 14:44:08 by ofadhel           #+#    #+#             */
-/*   Updated: 2024/06/10 15:25:49 by ofadhel          ###   ########.fr       */
+/*   Updated: 2024/07/30 12:36:20 by ofadhel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,5 @@ void PresidentialPardonForm::execute(Bureaucrat const &executor) const
 	if (this->getSigned() == false)
 		throw FormNotSignedException();
 
-	std::cout << _target << " has been pardoned by Zafod Beeblebrox." << std::endl;
+	std::cout << _target << " has been pardoned by Zaphod Beeblebrox." << std::endl;
 }

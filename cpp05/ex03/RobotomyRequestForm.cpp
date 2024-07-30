@@ -6,7 +6,7 @@
 /*   By: ofadhel <ofadhel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 14:47:12 by ofadhel           #+#    #+#             */
-/*   Updated: 2024/06/10 15:29:06 by ofadhel          ###   ########.fr       */
+/*   Updated: 2024/07/30 12:55:11 by ofadhel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,9 @@ void RobotomyRequestForm::execute(Bureaucrat const &executor) const
 
 	std::cout << "brrrr     drrrrr   papapapap" << std::endl;
 
-	int	i;
+	srand(time(NULL));
+	int	i = rand() % 2;
+	std::cout << i << std::endl;
 	if (i % 2)
 		std::cout << _target << " has been robotomized." << std::endl;
 	else

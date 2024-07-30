@@ -6,7 +6,7 @@
 /*   By: ofadhel <ofadhel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 18:20:59 by ofadhel           #+#    #+#             */
-/*   Updated: 2024/06/20 12:42:04 by ofadhel          ###   ########.fr       */
+/*   Updated: 2024/07/30 13:15:40 by ofadhel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,25 @@ int	main()
 {
 	try
 	{
-		Bureaucrat	first("Andromeda",3);
-		Bureaucrat	second("Sirio", 10);
-		Bureaucrat	third("Phoenix", 15);
-		Intern	doItForMe;
+		Intern	someRandomIntern;
+		Bureaucrat	first("Bureaucrat1",5);
+		Bureaucrat	second("Bureaucrat2", 10);
+		Bureaucrat	third("Bureaucrat3", 150);
 
-		AForm	*randomStuff(doItForMe.makeForm("shrbbery creation", "tree"));
-		std::cout<<"cairo"<<std::endl;
-		first.signForm(*randomStuff);
-		std::cout<<"cairo"<<std::endl;
-		second.executeForm(*randomStuff);
-		delete randomStuff;
+		AForm	*rrf(someRandomIntern.makeForm("shrubbery creation", "tree"));
+		std::cout<< "first test" <<std::endl;
+		first.signForm(*rrf);
+		first.executeForm(*rrf);
+		delete rrf;
+		AForm	*rrf2(someRandomIntern.makeForm("robotomy request", "robot"));
+		std::cout<< "second test" <<std::endl;
+		second.signForm(*rrf2);
+		second.executeForm(*rrf2);
+		delete rrf2;
+		AForm	*rrf3(someRandomIntern.makeForm("shrubbery creation", "tree"));
+		std::cout<< "exception test" <<std::endl;
+		third.signForm(*rrf3);
+		delete rrf3;
 	}
 	catch (const std::exception& e)
 	{

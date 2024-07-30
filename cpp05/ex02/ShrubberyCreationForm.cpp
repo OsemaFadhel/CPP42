@@ -6,7 +6,7 @@
 /*   By: ofadhel <ofadhel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 14:31:39 by ofadhel           #+#    #+#             */
-/*   Updated: 2024/06/10 15:27:42 by ofadhel          ###   ########.fr       */
+/*   Updated: 2024/07/30 12:30:10 by ofadhel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ void ShrubberyCreationForm::execute(Bureaucrat const &executor) const
 	if (this->getSigned() == false)
 		throw FormNotSignedException();
 
-	std::ofstream file(_target + "_shrubbery");
+	std::string filename = _target + "_shrubbery";
+	std::ofstream file(filename.c_str());
 	if (!file.is_open())
 	{
 		std::cerr << "Error: could not open file" << std::endl;

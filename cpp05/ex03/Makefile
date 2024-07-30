@@ -6,7 +6,7 @@
 #    By: ofadhel <ofadhel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/23 19:36:25 by ofadhel           #+#    #+#              #
-#    Updated: 2024/07/16 14:46:40 by ofadhel          ###   ########.fr        #
+#    Updated: 2024/07/30 12:55:53 by ofadhel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ $(NAME): $(OBJS)
 	$(CPP) $(OBJS) $(SRC) -o $(NAME) $(FLAGS)
 
 clean:
-	rm -rf $(NAME) $(OBJS)
+	rm -rf $(NAME) $(OBJS) tree_shrubbery
 
 fclean: clean
 
