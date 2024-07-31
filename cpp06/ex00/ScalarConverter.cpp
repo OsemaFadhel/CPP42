@@ -6,7 +6,7 @@
 /*   By: ofadhel <ofadhel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 16:39:07 by ofadhel           #+#    #+#             */
-/*   Updated: 2024/07/16 15:03:10 by ofadhel          ###   ########.fr       */
+/*   Updated: 2024/07/31 15:41:47 by ofadhel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,6 @@
 
 ScalarConverter::ScalarConverter()
 {
-	_input = "";
-}
-
-ScalarConverter::ScalarConverter(std::string input) : _input(input)
-{
-	findtype();
 }
 
 ScalarConverter::ScalarConverter(ScalarConverter const &src)
@@ -29,8 +23,7 @@ ScalarConverter::ScalarConverter(ScalarConverter const &src)
 
 ScalarConverter &ScalarConverter::operator=(ScalarConverter const &src)
 {
-	if (this != &src)
-		_input = src._input;
+	(void)src;
 	return *this;
 }
 
@@ -38,38 +31,11 @@ ScalarConverter::~ScalarConverter()
 {
 }
 
-void ScalarConverter::findtype()
+
+void ScalarConverter::convert(std::string _input)
 {
-	if (_input.length() == 1 && !std::isdigit(_input[0])) {
-		_type = 0;
-		return;
-	}
+	int _type = findtype(_input);
 
-	char *end;
-	long value = std::strtol(_input.c_str(), &end, 10);
-	if (*end == '\0' && value >= std::numeric_limits<int>::min() && value <= std::numeric_limits<int>::max()) {
-		_type = 1;
-		return;
-	}
-
-	std::strtof(_input.c_str(), &end);
-	if (*end == 'f' && *(end + 1) == '\0') {
-		_type = 2;
-		return;
-	}
-
-	std::strtod(_input.c_str(), &end);
-	if (*end == '\0') {
-		_type = 3;
-		return;
-	}
-
-	_type = -1;
-}
-
-void ScalarConverter::convert()
-{
-	findtype();
 	switch (_type) {
 		case 0:
 		{
@@ -83,7 +49,10 @@ void ScalarConverter::convert()
 		case 1:
 		{
 			int i = std::atoi(_input.c_str());
-			printChar(static_cast<char>(i));
+			if (i < 0 || i > 127)
+				std::cout << "char: impossible" << std::endl;
+			else
+				printChar(static_cast<char>(i));
 			printInt(i);
 			printFloat(static_cast<float>(i));
 			printDouble(static_cast<double>(i));
@@ -101,7 +70,10 @@ void ScalarConverter::convert()
 			}
 			else
 			{
-				printChar(static_cast<char>(f));
+				if (f < 0 || f > 127)
+					std::cout << "char: impossible" << std::endl;
+				else
+					printChar(static_cast<char>(f));
 				printInt(static_cast<int>(f));
 				printFloat(f);
 				printDouble(static_cast<double>(f));
@@ -120,7 +92,10 @@ void ScalarConverter::convert()
 			}
 			else
 			{
-				printChar(static_cast<char>(d));
+				if (d < 0 || d > 127)
+					std::cout << "char: impossible" << std::endl;
+				else
+					printChar(static_cast<char>(d));
 				printInt(static_cast<int>(d));
 				printFloat(static_cast<float>(d));
 				printDouble(d);
@@ -134,43 +109,4 @@ void ScalarConverter::convert()
 			std::cout << "double: impossible" << std::endl;
 			break;
 	}
-}
-
-void ScalarConverter::printChar(char c)
-{
-	if (std::isprint(c))
-		std::cout << "char: '" << c << "'" << std::endl;
-	else
-		std::cout << "char: Non displayable" << std::endl;
-}
-
-void ScalarConverter::printInt(int i)
-{
-	std::cout << "int: " << i << std::endl;
-}
-
-void ScalarConverter::printFloat(float f) {
-	if (isSpecialFloat(f))
-		std::cout << "float: " << f << "f" << std::endl;
-	else
-		std::cout << "float: " <<  std::fixed << std::setprecision(floor(f) == f ? 1 : 6) << f << "f" << std::endl;
-}
-
-void ScalarConverter::printDouble(double d) {
-	if (isSpecialDouble(d))
-	std::cout << "double: " << d << std::endl;
-	else
-		std::cout << "double: " << std::fixed << std::setprecision(floor(d) == d ? 1 : 6) << d << std::endl;
-}
-
-bool ScalarConverter::isSpecialFloat(float f) {
-	return f == std::numeric_limits<float>::infinity() ||
-			f == -std::numeric_limits<float>::infinity() ||
-			f != f;
-}
-
-bool ScalarConverter::isSpecialDouble(double d) {
-	return d == std::numeric_limits<double>::infinity() ||
-			d == -std::numeric_limits<double>::infinity() ||
-			d != d;
 }

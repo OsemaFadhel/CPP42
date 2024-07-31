@@ -6,7 +6,7 @@
 /*   By: ofadhel <ofadhel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 16:39:19 by ofadhel           #+#    #+#             */
-/*   Updated: 2024/04/26 16:39:19 by ofadhel          ###   ########.fr       */
+/*   Updated: 2024/07/31 15:33:25 by ofadhel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ int main(int ac, char **av)
 		std::cout << "Error: Invalid number of arguments" << std::endl;
 		return 1;
 	}
-	ScalarConverter sc = ScalarConverter(av[1]);
-	sc.convert();
+	ScalarConverter::convert(av[1]);
 	return 0;
 }
