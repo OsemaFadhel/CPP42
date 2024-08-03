@@ -6,7 +6,7 @@
 /*   By: ofadhel <ofadhel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 22:42:59 by ofadhel           #+#    #+#             */
-/*   Updated: 2024/08/03 22:43:53 by ofadhel          ###   ########.fr       */
+/*   Updated: 2024/08/03 22:51:34 by ofadhel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,10 @@
 
 PmergeMe::PmergeMe(std::deque<int> d) : _d(d)
 {
+	std::cout << "Before:  " << std::endl;
+	for (std::deque<int>::iterator it = _d.begin(); it != _d.end(); it++)
+		std::cout << *it << " ";
+	std::cout << std::endl;
 }
 
 PmergeMe::PmergeMe(PmergeMe const &src)
@@ -42,4 +46,12 @@ int PmergeMe::jacobsthal(int n)
 	if (n == 1)
 		return 1;
 	return jacobsthal(n - 1) + 2 * jacobsthal(n - 2);
+}
+
+
+void PmergeMe::print()
+{
+	std::cout << "After:  " << std::endl;
+	for (std::vector<int>::iterator it = _v.begin(); it != _v.end(); it++)
+		std::cout << *it << " ";
 }

@@ -6,7 +6,7 @@
 /*   By: ofadhel <ofadhel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 21:26:23 by ofadhel           #+#    #+#             */
-/*   Updated: 2024/08/03 22:44:12 by ofadhel          ###   ########.fr       */
+/*   Updated: 2024/08/03 22:48:27 by ofadhel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int main(int ac, char **av)
 		std::deque<int> deq;
 		::checkArg(++av, &deq); //check if the argument are all positive numbers
 		PmergeMe p(deq);
-
+		//p.start();
 	}
 	catch(const std::exception& e)
 	{
