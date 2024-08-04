@@ -6,7 +6,7 @@
 /*   By: ofadhel <ofadhel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 22:42:59 by ofadhel           #+#    #+#             */
-/*   Updated: 2024/08/04 21:21:02 by ofadhel          ###   ########.fr       */
+/*   Updated: 2024/08/04 21:25:46 by ofadhel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,15 +187,6 @@ std::deque<int> PmergeMe::jacobsthalSequence(int n)
 std::deque<int> PmergeMe::insertSequence(std::deque<int> jacobsthal, int size)
 {
 	std::deque<int> insertionSequence;
-	/*for (int i = 0; i < n; i++)
-	{
-		int j = 0;
-		while (jacobsthal[j] < i)
-			j++;
-		insertionSequence.push_back(jacobsthal[j]);
-	}
-	return insertionSequence;*/
-	/*or gotta study this*/
 	size_t jacobsthal_index = 0;
 	for (int i = 0; i < size; ++i)
 	{
