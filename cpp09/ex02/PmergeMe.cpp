@@ -6,7 +6,7 @@
 /*   By: ofadhel <ofadhel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 22:42:59 by ofadhel           #+#    #+#             */
-/*   Updated: 2024/08/04 18:35:55 by ofadhel          ###   ########.fr       */
+/*   Updated: 2024/08/04 21:21:02 by ofadhel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,56 +37,12 @@ PmergeMe &PmergeMe::operator=(PmergeMe const &rhs)
 	return *this;
 }
 
-void PmergeMe::print(std::string const str)
-{
-	std::cout << str;
-	for (std::deque<int>::iterator it = _d.begin(); it != _d.end(); it++)
-		std::cout << *it << " ";
-	std::cout << std::endl;
-}
-
-std::deque<int> PmergeMe::jacobsthalSequence(int n)
-{
-	std::deque<int> jacobsthal;
-	jacobsthal.push_back(1);
-	jacobsthal.push_back(1);
-	for (int i = 2; i < n; i++)
-		jacobsthal.push_back(jacobsthal[i - 1] + 2 * jacobsthal[i - 2]);
-	return jacobsthal;
-}
-
-std::deque<int> PmergeMe::insertSequence(std::deque<int> jacobsthal, int n)
-{
-	std::deque<int> insertionSequence;
-	for (int i = 0; i < n; i++)
-	{
-		int j = 0;
-		while (jacobsthal[j] < i)
-			j++;
-		insertionSequence.push_back(jacobsthal[j]);
-	}
-	return insertionSequence;
-	/*or gotta study this
-	int jacobsthal_index = 0;
-    for (int i = 0; i < size; ++i) {
-        if (jacobsthal_index < jacobsthal_seq.size() && jacobsthal_seq[jacobsthal_index] == i + 1) {
-            sequence.push_back(jacobsthal_seq[jacobsthal_index]);
-            ++jacobsthal_index;
-        } else {
-            sequence.push_back(i + 1);
-        }
-    }
-    return sequence;
-	*/
-
-}
-
 // Compare pairs by the value of it’s largest pair.
 struct ComparePairs
 {
 	bool operator()(std::pair<int, int> const &a, std::pair<int, int> const &b)
 	{
-		return std::max(a.first, a.second) > std::max(b.first, b.second);
+		return std::max(a.first, a.second) < std::max(b.first, b.second);
 	}
 };
 
@@ -140,6 +96,7 @@ void PmergeMe::start()
 		main.push_back(it->second);
 		pend.push_back(it->first);
 	}
+	pend.push_back(_straggler);
 	//print the 2 sequences
 	for (std::deque<int>::iterator it = main.begin(); it != main.end(); ++it)
 		std::cout << *it << " ";
@@ -170,6 +127,9 @@ void PmergeMe::start()
 	std::cout << "Building insertion sequence: " << std::endl;
 	std::deque<int> insertionSequence = insertSequence(jacobsthal, pend.size());
 
+
+
+
 	//check sequence before big work
 	std::cout << "Insertion sequence: ";
 	for (std::deque<int>::iterator it = insertionSequence.begin(); it != insertionSequence.end(); ++it)
@@ -184,28 +144,75 @@ void PmergeMe::start()
 		std::cout << *it << " ";
 	std::cout << std::endl << std::endl;
 
+
 	//7. Loop through the elements in ‘pend’, and using the insertion sequence built in the previous step, use binary search to insert each ‘pend’ element into ‘main’
 	std::cout << "Inserting elements into main" << std::endl;
 	for (size_t i = 0; i < pend.size(); i++)
-	{
-		std::deque<int>::iterator it = std::lower_bound(main.begin(), main.end(), pend[insertionSequence[i] - 1]);
-		main.insert(it, pend[insertionSequence[i]]);
-	}
+		binaryInsert(main, pend[insertionSequence[i] - 1]);
 	//print the main sequence
 	for (std::deque<int>::iterator it = main.begin(); it != main.end(); ++it)
 		std::cout << *it << " ";
 	std::cout << std::endl << std::endl;
 
-
-	//8. Finally, if there was a straggler, insert it into ‘main’ using binary search. THE END!!!
-	std::cout << "Inserting straggler" << std::endl;
+	/*//8. Finally, if there was a straggler, insert it into ‘main’ using binary search. THE END!!!
 	if (_straggler != -1)
 	{
-		std::deque<int>::iterator it = std::lower_bound(main.begin(), main.end(), _straggler);
-		main.insert(it, _straggler);
-	}
+		std::cout << "Inserting straggler" << std::endl;
+		binaryInsert(main, _straggler);
+	}*/
 	//print the main sequence
 	for (std::deque<int>::iterator it = main.begin(); it != main.end(); ++it)
 		std::cout << *it << " ";
 	std::cout << std::endl << std::endl;
 }
+
+void PmergeMe::print(std::string const str)
+{
+	std::cout << str;
+	for (std::deque<int>::iterator it = _d.begin(); it != _d.end(); it++)
+		std::cout << *it << " ";
+	std::cout << std::endl;
+}
+
+std::deque<int> PmergeMe::jacobsthalSequence(int n)
+{
+	std::deque<int> jacobsthal;
+	jacobsthal.push_back(1);
+	jacobsthal.push_back(1);
+	for (int i = 2; i < n; i++)
+		jacobsthal.push_back(jacobsthal[i - 1] + 2 * jacobsthal[i - 2]);
+	return jacobsthal;
+}
+
+std::deque<int> PmergeMe::insertSequence(std::deque<int> jacobsthal, int size)
+{
+	std::deque<int> insertionSequence;
+	/*for (int i = 0; i < n; i++)
+	{
+		int j = 0;
+		while (jacobsthal[j] < i)
+			j++;
+		insertionSequence.push_back(jacobsthal[j]);
+	}
+	return insertionSequence;*/
+	/*or gotta study this*/
+	size_t jacobsthal_index = 0;
+	for (int i = 0; i < size; ++i)
+	{
+		if (jacobsthal_index < jacobsthal.size() && jacobsthal[jacobsthal_index] == i + 1)
+		{
+			insertionSequence.push_back(jacobsthal[jacobsthal_index]);
+			++jacobsthal_index;
+		}
+		else
+			insertionSequence.push_back(i + 1);
+	}
+	return insertionSequence;
+}
+
+void PmergeMe::binaryInsert(std::deque<int> &main, int value)
+{
+	std::deque<int>::iterator it = std::lower_bound(main.begin(), main.end(), value);
+	main.insert(it, value);
+}
+

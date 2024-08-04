@@ -6,7 +6,7 @@
 /*   By: ofadhel <ofadhel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 21:26:43 by ofadhel           #+#    #+#             */
-/*   Updated: 2024/08/04 18:28:10 by ofadhel          ###   ########.fr       */
+/*   Updated: 2024/08/04 21:06:03 by ofadhel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ class PmergeMe
 		std::deque<std::pair<int, int> > createPairs();
 		std::deque<int> jacobsthalSequence(int n);
 		std::deque<int> insertSequence(std::deque<int> jacobsthal, int n);
+		void binaryInsert(std::deque<int> &main, int value);
 };
 
 #endif
