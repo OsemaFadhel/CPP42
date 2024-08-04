@@ -6,7 +6,7 @@
 /*   By: ofadhel <ofadhel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 21:26:43 by ofadhel           #+#    #+#             */
-/*   Updated: 2024/08/03 22:52:38 by ofadhel          ###   ########.fr       */
+/*   Updated: 2024/08/04 18:28:10 by ofadhel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,14 @@
 # include <stdexcept>
 # include <exception>
 # include <ctime>
+# include <utility>
 
 class PmergeMe
 {
 	private:
 		std::vector<int> _v; //or list
 		std::deque<int> _d;
+		int _straggler;
 		//time deaque;
 		//time vector;
 	public:
@@ -41,8 +43,10 @@ class PmergeMe
 
 		void start();
 		int jacobsthal(int n);
-		void print();
-
+		void print(std::string const str);
+		std::deque<std::pair<int, int> > createPairs();
+		std::deque<int> jacobsthalSequence(int n);
+		std::deque<int> insertSequence(std::deque<int> jacobsthal, int n);
 };
 
 #endif
