@@ -6,7 +6,7 @@
 /*   By: ofadhel <ofadhel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 22:42:59 by ofadhel           #+#    #+#             */
-/*   Updated: 2024/08/06 15:35:55 by ofadhel          ###   ########.fr       */
+/*   Updated: 2024/08/06 18:31:56 by ofadhel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,72 +48,17 @@ struct ComparePairs
 	}
 };
 
-// Deque
-
-void PmergeMe::start()
-{
-	//0. start timer
-	std::clock_t start_d = std::clock();
-	//1. first check if the deque is even or odd.  If odd, remove the last element and call it straggler
-	if (_d.size() % 2 != 0)
-	{
-		_straggler = _d.back();
-		_d.pop_back();
-	}
-	std::cout << std::endl;
-
-	//2. Now we can start creating pairs
-	std::deque<std::pair<int, int> > pairs;
-	for (size_t i = 0; i < _d.size(); i += 2)
-		pairs.push_back(std::make_pair(_d[i], _d[i + 1]));
-	_d.clear();
-
-	//3. Sorting the pairs, [a, b] where a < b
- 	for (std::deque<std::pair<int, int> >::iterator it = pairs.begin(); it != pairs.end(); ++it)
-	{
-		if (it->first > it->second)
-			std::swap(it->first, it->second);
-	}
-
-	//4. Sort the sequence recursively by the value of it’s largest pair.
-	std::sort(pairs.begin(), pairs.end(), ComparePairs()); //maybe rewrite sort function
-
-	//5. Create a new sequence ‘pend’, by pulling out the [highest] value of each pair and inserting it into ‘pend’.
-	std::deque<int> pend;
-	for (std::deque<std::pair<int, int> >::iterator it = pairs.begin(); it != pairs.end(); ++it)
-	{
-		_d.push_back(it->second);
-		pend.push_back(it->first);
-	}
-	if (_straggler != -1)
-		pend.push_back(_straggler);
-
-	//6. Based on the length of ‘pend’, build the optimal insertion sequence using relevant Jacobsthal numbers.
-	std::deque<int> jacobsthal = jacobsthalSequenceD<std::deque<int> >(pend.size());
-	std::deque<int> insertionSequence = insertSequence(jacobsthal, pend.size());
-
-	//7. Loop through the elements in ‘pend’, and using the insertion sequence built in the previous step, use binary search to insert each ‘pend’ element into ‘_d’
-	for (size_t i = 0; i < pend.size(); i++)
-		binaryInsert(_d, pend[insertionSequence[i] - 1]);
-
-	//end timer
-	std::clock_t end_d = std::clock();
-	double process_time_deque = double(end_d - start_d) / CLOCKS_PER_SEC;
-
-	printDeque("After: ");
-	startVector(); //now do the same with vector
-	std::cout << "Time to process a range of " << _d.size() << " elements with std::deque: " << std::fixed << process_time_deque << "us" << std::endl;
-}
+//methods
 
 template <typename T>
 T PmergeMe::jacobsthalSequenceD(int n)
 {
-    T jacobsthal;
-    jacobsthal.push_back(1);
-    jacobsthal.push_back(1);
-    for (int i = 2; i < n; i++)
-        jacobsthal.push_back(jacobsthal[i - 1] + 2 * jacobsthal[i - 2]);
-    return jacobsthal;
+	T jacobsthal;
+	jacobsthal.push_back(1);
+	jacobsthal.push_back(1);
+	for (int i = 2; i < n; i++)
+		jacobsthal.push_back(jacobsthal[i - 1] + 2 * jacobsthal[i - 2]);
+	return jacobsthal;
 }
 
 template <typename T>
@@ -149,7 +94,109 @@ void PmergeMe::printDeque(std::string const str)
 	std::cout << std::endl;
 }
 
-// Vector
+
+// Deque
+
+void PmergeMe::recursionSort(std::deque<std::pair<int, int> > &pairs)
+{
+	for (size_t i = 0; i < _d.size(); i += 2)
+		pairs.push_back(std::make_pair(_d[i], _d[i + 1]));
+	_d.clear();
+	if (pairs.size() == 1)
+	{
+		if (pairs[0].first > pairs[0].second)
+			std::swap(pairs[0].first, pairs[0].second);
+		_d.push_back(pairs[0].first);
+		_d.push_back(pairs[0].second);
+		return;
+	}
+	for (std::deque<std::pair<int, int> >::iterator it = pairs.begin(); it != pairs.end(); ++it)
+	{
+		if (it->first > it->second)
+			std::swap(it->first, it->second);
+	}
+	std::deque<std::pair<int, int> > new_pairs;
+	for (size_t i = 0; i < pairs.size(); i += 2)
+		new_pairs.push_back(std::make_pair(pairs[i].second, pairs[i + 1].second));
+	//print the pairs
+	recursionSort(new_pairs);
+	std::deque<int> pend;
+	for (std::deque<std::pair<int, int> >::iterator it = pairs.begin(); it != pairs.end(); ++it)
+		pend.push_back(it->first);
+	for (std::deque<int>::iterator it = pend.begin(); it != pend.end(); ++it)
+		std::cout << *it << " ";
+	std::cout << std::endl;
+
+	std::deque<int> jacobsthal = jacobsthalSequenceD<std::deque<int> >(pend.size());
+	std::deque<int> insertionSequence = insertSequence(jacobsthal, pend.size());
+	for (size_t i = 0; i < pend.size(); i++)
+		binaryInsert(_d, pend[insertionSequence[i] - 1]);
+
+}
+
+void PmergeMe::start()
+{
+	//0. start timer
+	//std::clock_t start_d = std::clock();
+	//1. first check if the deque is even or odd.  If odd, remove the last element and call it straggler
+	if (_d.size() % 2 != 0)
+	{
+		_straggler = _d.back();
+		_d.pop_back();
+	}
+	std::cout << std::endl;
+
+	//2. Now we can start creating pairs
+	std::deque<std::pair<int, int> > pairs;
+
+
+	recursionSort(pairs);
+
+
+
+/*
+	//3. Sorting the pairs, [a, b] where a < b
+ 	for (std::deque<std::pair<int, int> >::iterator it = pairs.begin(); it != pairs.end(); ++it)
+	{
+		if (it->first > it->second)
+			std::swap(it->first, it->second);
+	}*/
+
+	//here it should start the recursive sort or maybe the pair step before put it in the recursion
+
+
+
+/*
+	//5. Create a new sequence ‘pend’, by pulling out the [highest] value of each pair and inserting it into ‘pend’.
+	std::deque<int> pend;
+	for (std::deque<std::pair<int, int> >::iterator it = pairs.begin(); it != pairs.end(); ++it)
+	{
+		_d.push_back(it->second);
+		pend.push_back(it->first);
+	}
+	if (_straggler != -1)
+		pend.push_back(_straggler);
+
+	//6. Based on the length of ‘pend’, build the optimal insertion sequence using relevant Jacobsthal numbers.
+	std::deque<int> jacobsthal = jacobsthalSequenceD<std::deque<int> >(pend.size());
+	std::deque<int> insertionSequence = insertSequence(jacobsthal, pend.size());
+
+	//7. Loop through the elements in ‘pend’, and using the insertion sequence built in the previous step, use binary search to insert each ‘pend’ element into ‘_d’
+	for (size_t i = 0; i < pend.size(); i++)
+		binaryInsert(_d, pend[insertionSequence[i] - 1]);
+
+	//end timer
+	std::clock_t end_d = std::clock();
+	double process_time_deque = double(end_d - start_d) / CLOCKS_PER_SEC;
+*/
+	printDeque("After: ");
+	//startVector(); //now do the same with vector
+	//std::cout << "Time to process a range of " << _d.size() << " elements with std::deque: " << std::fixed << process_time_deque << "us" << std::endl;
+
+}
+
+
+// Vector to change
 
 void PmergeMe::startVector()
 {
@@ -171,8 +218,6 @@ void PmergeMe::startVector()
 			std::swap(it->first, it->second);
 	}
 
-	std::sort(pairs.begin(), pairs.end(), ComparePairs()); //maybe rewrite sort function
-
 	std::vector<int> pend;
 	for (std::vector<std::pair<int, int> >::iterator it = pairs.begin(); it != pairs.end(); ++it)
 	{
@@ -190,7 +235,7 @@ void PmergeMe::startVector()
 
 	std::clock_t end_v = std::clock();
 	double process_time_vector = double(end_v - start_v) / CLOCKS_PER_SEC;
-	
+
 	std::cout << "Time to process a range of " << _v.size() << " elements with std::vector: " << std::fixed << process_time_vector << "us" << std::endl;
 }
 

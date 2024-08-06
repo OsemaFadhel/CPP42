@@ -6,7 +6,7 @@
 /*   By: ofadhel <ofadhel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 21:26:43 by ofadhel           #+#    #+#             */
-/*   Updated: 2024/08/06 15:35:00 by ofadhel          ###   ########.fr       */
+/*   Updated: 2024/08/06 18:10:04 by ofadhel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ class PmergeMe
 		void startVector();
 		int jacobsthal(int n);
 		void printDeque(std::string const str);
+		void recursionSort(std::deque<std::pair<int, int> > &pairs);
 
 		template <typename T>
 		T jacobsthalSequenceD(int n);
