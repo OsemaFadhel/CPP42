@@ -6,7 +6,7 @@
 /*   By: ofadhel <ofadhel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 22:42:59 by ofadhel           #+#    #+#             */
-/*   Updated: 2024/08/04 21:25:46 by ofadhel          ###   ########.fr       */
+/*   Updated: 2024/08/06 14:48:50 by ofadhel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,61 @@ struct ComparePairs
 	}
 };
 
+void PmergeMe::start()
+{
+	//0. start timer
+	std::clock_t start_d = std::clock();
+	//1. first check if the deque is even or odd.  If odd, remove the last element and call it straggler
+	if (_d.size() % 2 != 0)
+	{
+		_straggler = _d.back();
+		_d.pop_back();
+	}
+	std::cout << std::endl;
+
+	//2. Now we can start creating pairs
+	std::deque<std::pair<int, int> > pairs;
+	for (size_t i = 0; i < _d.size(); i += 2)
+		pairs.push_back(std::make_pair(_d[i], _d[i + 1]));
+	_d.clear();
+
+	//3. Sorting the pairs, [a, b] where a < b
+ 	for (std::deque<std::pair<int, int> >::iterator it = pairs.begin(); it != pairs.end(); ++it)
+	{
+		if (it->first > it->second)
+			std::swap(it->first, it->second);
+	}
+
+	//4. Sort the sequence recursively by the value of it’s largest pair.
+	std::sort(pairs.begin(), pairs.end(), ComparePairs()); //maybe rewrite sort function
+
+	//5. Create a new sequence ‘pend’, by pulling out the [highest] value of each pair and inserting it into ‘pend’.
+	std::deque<int> pend;
+	for (std::deque<std::pair<int, int> >::iterator it = pairs.begin(); it != pairs.end(); ++it)
+	{
+		_d.push_back(it->second);
+		pend.push_back(it->first);
+	}
+	if (_straggler != -1)
+		pend.push_back(_straggler);
+
+	//6. Based on the length of ‘pend’, build the optimal insertion sequence using relevant Jacobsthal numbers.
+	std::deque<int> jacobsthal = jacobsthalSequence(pend.size());
+	std::deque<int> insertionSequence = insertSequence(jacobsthal, pend.size());
+
+	//7. Loop through the elements in ‘pend’, and using the insertion sequence built in the previous step, use binary search to insert each ‘pend’ element into ‘_d’
+	for (size_t i = 0; i < pend.size(); i++)
+		binaryInsert(_d, pend[insertionSequence[i] - 1]);
+
+	//end timer
+	std::clock_t end_d = std::clock();
+	double process_time_deque = double(end_d - start_d) / CLOCKS_PER_SEC;
+
+	print("After: ");
+	std::cout << "Time to process a range of " << _d.size() << " elements with std::deque: " << std::fixed << process_time_deque << "us" << std::endl;
+}
+
+/* TEst with prints
 void PmergeMe::start()
 {
 	//1. first check if the deque is even or odd.  If odd, remove the last element and call it straggler
@@ -96,7 +151,8 @@ void PmergeMe::start()
 		main.push_back(it->second);
 		pend.push_back(it->first);
 	}
-	pend.push_back(_straggler);
+	if (_straggler != -1)
+		pend.push_back(_straggler);
 	//print the 2 sequences
 	for (std::deque<int>::iterator it = main.begin(); it != main.end(); ++it)
 		std::cout << *it << " ";
@@ -105,7 +161,6 @@ void PmergeMe::start()
 		std::cout << *it << " ";
 	std::cout << std::endl << std::endl;
 
-	/************************************************************************************
 	At this point, we could take any of the bs and use binary-search-insertion
 	to insert that b into the main-chain (which starts of as just the as).
 	When inserting, we only need to consider the values "left" of the b in question
@@ -119,7 +174,6 @@ void PmergeMe::start()
 	(ignoring values which are greater than the bs we have).
 	And so, we insert the bs, one at a time, into the main-chain following
 	the above progression, eventually resulting in a sorted list.
-	************************************************************************************/
 
 	//6. Based on the length of ‘pend’, build the optimal insertion sequence using relevant Jacobsthal numbers.
 	std::cout << "Building Jacobsthal sequence" << std::endl;
@@ -154,17 +208,18 @@ void PmergeMe::start()
 		std::cout << *it << " ";
 	std::cout << std::endl << std::endl;
 
-	/*//8. Finally, if there was a straggler, insert it into ‘main’ using binary search. THE END!!!
+	//8. Finally, if there was a straggler, insert it into ‘main’ using binary search. THE END!!!
 	if (_straggler != -1)
 	{
 		std::cout << "Inserting straggler" << std::endl;
 		binaryInsert(main, _straggler);
-	}*/
+	}
 	//print the main sequence
 	for (std::deque<int>::iterator it = main.begin(); it != main.end(); ++it)
 		std::cout << *it << " ";
 	std::cout << std::endl << std::endl;
 }
+*/
 
 void PmergeMe::print(std::string const str)
 {
