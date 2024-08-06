@@ -6,7 +6,7 @@
 /*   By: ofadhel <ofadhel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 21:26:43 by ofadhel           #+#    #+#             */
-/*   Updated: 2024/08/04 21:06:03 by ofadhel          ###   ########.fr       */
+/*   Updated: 2024/08/06 15:35:00 by ofadhel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,24 +30,28 @@
 class PmergeMe
 {
 	private:
-		std::vector<int> _v; //or list
 		std::deque<int> _d;
+		std::vector<int> _v;
 		int _straggler;
-		//time deaque;
-		//time vector;
 	public:
-		PmergeMe(std::deque<int> d);
+		PmergeMe(std::deque<int> d, std::vector<int> v);
 		PmergeMe(PmergeMe const &src);
 		~PmergeMe();
 		PmergeMe &operator=(PmergeMe const &rhs);
 
 		void start();
+		void startVector();
 		int jacobsthal(int n);
-		void print(std::string const str);
-		std::deque<std::pair<int, int> > createPairs();
-		std::deque<int> jacobsthalSequence(int n);
-		std::deque<int> insertSequence(std::deque<int> jacobsthal, int n);
-		void binaryInsert(std::deque<int> &main, int value);
+		void printDeque(std::string const str);
+
+		template <typename T>
+		T jacobsthalSequenceD(int n);
+
+		template <typename T>
+		T insertSequence(T jacobsthal, int n);
+
+		template <typename T>
+		void binaryInsert(T &main, int n);
 };
 
 #endif

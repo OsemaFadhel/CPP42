@@ -6,16 +6,18 @@
 /*   By: ofadhel <ofadhel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 22:42:59 by ofadhel           #+#    #+#             */
-/*   Updated: 2024/08/06 14:48:50 by ofadhel          ###   ########.fr       */
+/*   Updated: 2024/08/06 15:35:55 by ofadhel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PmergeMe.hpp"
 
-PmergeMe::PmergeMe(std::deque<int> d) : _d(d)
+PmergeMe::PmergeMe(std::deque<int> d, std::vector<int> v)
 {
+	_d = d;
+	_v = v;
 	_straggler = -1; //used like a flag if the sequence is odd
-	print("Before: ");
+	printDeque("Before: ");
 }
 
 PmergeMe::PmergeMe(PmergeMe const &src)
@@ -45,6 +47,8 @@ struct ComparePairs
 		return std::max(a.first, a.second) < std::max(b.first, b.second);
 	}
 };
+
+// Deque
 
 void PmergeMe::start()
 {
@@ -85,7 +89,7 @@ void PmergeMe::start()
 		pend.push_back(_straggler);
 
 	//6. Based on the length of ‘pend’, build the optimal insertion sequence using relevant Jacobsthal numbers.
-	std::deque<int> jacobsthal = jacobsthalSequence(pend.size());
+	std::deque<int> jacobsthal = jacobsthalSequenceD<std::deque<int> >(pend.size());
 	std::deque<int> insertionSequence = insertSequence(jacobsthal, pend.size());
 
 	//7. Loop through the elements in ‘pend’, and using the insertion sequence built in the previous step, use binary search to insert each ‘pend’ element into ‘_d’
@@ -96,8 +100,98 @@ void PmergeMe::start()
 	std::clock_t end_d = std::clock();
 	double process_time_deque = double(end_d - start_d) / CLOCKS_PER_SEC;
 
-	print("After: ");
+	printDeque("After: ");
+	startVector(); //now do the same with vector
 	std::cout << "Time to process a range of " << _d.size() << " elements with std::deque: " << std::fixed << process_time_deque << "us" << std::endl;
+}
+
+template <typename T>
+T PmergeMe::jacobsthalSequenceD(int n)
+{
+    T jacobsthal;
+    jacobsthal.push_back(1);
+    jacobsthal.push_back(1);
+    for (int i = 2; i < n; i++)
+        jacobsthal.push_back(jacobsthal[i - 1] + 2 * jacobsthal[i - 2]);
+    return jacobsthal;
+}
+
+template <typename T>
+T PmergeMe::insertSequence(T jacobsthal, int size)
+{
+	T insertionSequence;
+	size_t jacobsthal_index = 0;
+	for (int i = 0; i < size; ++i)
+	{
+		if (jacobsthal_index < jacobsthal.size() && jacobsthal[jacobsthal_index] == i + 1)
+		{
+			insertionSequence.push_back(jacobsthal[jacobsthal_index]);
+			++jacobsthal_index;
+		}
+		else
+			insertionSequence.push_back(i + 1);
+	}
+	return insertionSequence;
+}
+
+template <typename T>
+void PmergeMe::binaryInsert(T &main, int value)
+{
+	typename T::iterator it = std::lower_bound(main.begin(), main.end(), value);
+	main.insert(it, value);
+}
+
+void PmergeMe::printDeque(std::string const str)
+{
+	std::cout << str;
+	for (std::deque<int>::iterator it = _d.begin(); it != _d.end(); it++)
+		std::cout << *it << " ";
+	std::cout << std::endl;
+}
+
+// Vector
+
+void PmergeMe::startVector()
+{
+	std::clock_t start_v = std::clock();
+	if (_v.size() % 2 != 0)
+	{
+		_straggler = _v.back();
+		_v.pop_back();
+	}
+
+	std::vector<std::pair<int, int> > pairs;
+	for (size_t i = 0; i < _v.size(); i += 2)
+		pairs.push_back(std::make_pair(_v[i], _v[i + 1]));
+	_v.clear();
+
+ 	for (std::vector<std::pair<int, int> >::iterator it = pairs.begin(); it != pairs.end(); ++it)
+	{
+		if (it->first > it->second)
+			std::swap(it->first, it->second);
+	}
+
+	std::sort(pairs.begin(), pairs.end(), ComparePairs()); //maybe rewrite sort function
+
+	std::vector<int> pend;
+	for (std::vector<std::pair<int, int> >::iterator it = pairs.begin(); it != pairs.end(); ++it)
+	{
+		_v.push_back(it->second);
+		pend.push_back(it->first);
+	}
+	if (_straggler != -1)
+		pend.push_back(_straggler);
+
+	std::vector<int> jacobsthal = jacobsthalSequenceD<std::vector<int> >(pend.size());
+	std::vector<int> insertionSequence = insertSequence(jacobsthal, pend.size());
+
+	for (size_t i = 0; i < pend.size(); i++)
+		binaryInsert(_v, pend[insertionSequence[i] - 1]);
+
+	std::clock_t end_v = std::clock();
+	double process_time_vector = double(end_v - start_v) / CLOCKS_PER_SEC;
+	
+	std::cout << "Time to process a range of " << _v.size() << " elements with std::vector: " << std::fixed << process_time_vector << "us" << std::endl;
 }
 
 /* TEst with prints
@@ -220,45 +314,4 @@ void PmergeMe::start()
 	std::cout << std::endl << std::endl;
 }
 */
-
-void PmergeMe::print(std::string const str)
-{
-	std::cout << str;
-	for (std::deque<int>::iterator it = _d.begin(); it != _d.end(); it++)
-		std::cout << *it << " ";
-	std::cout << std::endl;
-}
-
-std::deque<int> PmergeMe::jacobsthalSequence(int n)
-{
-	std::deque<int> jacobsthal;
-	jacobsthal.push_back(1);
-	jacobsthal.push_back(1);
-	for (int i = 2; i < n; i++)
-		jacobsthal.push_back(jacobsthal[i - 1] + 2 * jacobsthal[i - 2]);
-	return jacobsthal;
-}
-
-std::deque<int> PmergeMe::insertSequence(std::deque<int> jacobsthal, int size)
-{
-	std::deque<int> insertionSequence;
-	size_t jacobsthal_index = 0;
-	for (int i = 0; i < size; ++i)
-	{
-		if (jacobsthal_index < jacobsthal.size() && jacobsthal[jacobsthal_index] == i + 1)
-		{
-			insertionSequence.push_back(jacobsthal[jacobsthal_index]);
-			++jacobsthal_index;
-		}
-		else
-			insertionSequence.push_back(i + 1);
-	}
-	return insertionSequence;
-}
-
-void PmergeMe::binaryInsert(std::deque<int> &main, int value)
-{
-	std::deque<int>::iterator it = std::lower_bound(main.begin(), main.end(), value);
-	main.insert(it, value);
-}
 

@@ -6,7 +6,7 @@
 /*   By: ofadhel <ofadhel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 21:26:23 by ofadhel           #+#    #+#             */
-/*   Updated: 2024/08/06 14:44:51 by ofadhel          ###   ########.fr       */
+/*   Updated: 2024/08/06 15:18:44 by ofadhel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void findDuplicate(std::deque<int> *deq, int n) //check if there is any duplicat
 	}
 }
 
-void checkArg(char **av, std::deque<int> *deq)
+void checkArg(char **av, std::deque<int> *deq, std::vector<int> *vec)
 {
 	for (int i = 0; av[i]; i++)
 	{
@@ -37,6 +37,7 @@ void checkArg(char **av, std::deque<int> *deq)
 		if (i > 0)
 			findDuplicate(deq, num);
 		deq->push_back(num);
+		vec->push_back(num);
 	}
 }
 
@@ -50,8 +51,9 @@ int main(int ac, char **av)
 	try
 	{
 		std::deque<int> deq;
-		::checkArg(++av, &deq); //check if the argument are all positive numbers
-		PmergeMe p(deq);
+		std::vector<int> vec;
+		::checkArg(++av, &deq, &vec); //check if the argument are all positive numbers
+		PmergeMe p(deq, vec);
 		p.start();
 	}
 	catch(const std::exception& e)
