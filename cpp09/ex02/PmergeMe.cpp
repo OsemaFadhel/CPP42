@@ -6,7 +6,7 @@
 /*   By: ofadhel <ofadhel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 22:42:59 by ofadhel           #+#    #+#             */
-/*   Updated: 2024/08/07 12:32:00 by ofadhel          ###   ########.fr       */
+/*   Updated: 2024/08/07 18:41:42 by ofadhel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,10 @@ void PmergeMe::recursionSort(std::deque<std::pair<int, int> > &pairs)
 			std::swap(pairs[0].first, pairs[0].second);
 		_d.push_back(pairs[0].first);
 		_d.push_back(pairs[0].second);
+		//print d
+		for (std::deque<int>::iterator it = _d.begin(); it != _d.end(); ++it)
+			std::cout << *it << " ";
+		std::cout << "After recursion: " << std::endl << std::endl;
 		return;
 	}
 	for (std::deque<std::pair<int, int> >::iterator it = pairs.begin(); it != pairs.end(); ++it)
@@ -107,10 +111,25 @@ void PmergeMe::recursionSort(std::deque<std::pair<int, int> > &pairs)
 			std::swap(it->first, it->second);
 	}
 	std::deque<std::pair<int, int> > new_pairs;
-	for (size_t i = 0; i < pairs.size(); i += 2)
-		new_pairs.push_back(std::make_pair(pairs[i].second, pairs[i + 1].second));
+	//print pairs
+	for (std::deque<std::pair<int, int> >::iterator it = pairs.begin(); it != pairs.end(); ++it)
+		std::cout << "[" << it->first << ", " << it->second << "] ";
+	std::cout << std::endl;
+	if (pairs.size() % 2 == 0 || pairs.size() > 3)
+	{
+		for (size_t i = 0; i < pairs.size(); i += 2)
+				new_pairs.push_back(std::make_pair(pairs[i].second, pairs[i + 1].second));
+	}
+	else
+	{
+		new_pairs.push_back(std::make_pair(pairs[0].second, pairs[1].second));
+		new_pairs.push_back(std::make_pair(pairs[2].first, pairs[2].second));
+		new_pairs.erase(new_pairs.begin() + 2);
+	}
+
 	//print the pairs
 	recursionSort(new_pairs);
+
 	std::deque<int> pend;
 	for (std::deque<std::pair<int, int> >::iterator it = pairs.begin(); it != pairs.end(); ++it)
 		pend.push_back(it->first);
@@ -122,6 +141,11 @@ void PmergeMe::recursionSort(std::deque<std::pair<int, int> > &pairs)
 	std::deque<int> insertionSequence = insertSequence(jacobsthal, pend.size());
 	for (size_t i = 0; i < pend.size(); i++)
 		binaryInsert(_d, pend[insertionSequence[i] - 1]);
+
+	std::cout << "Main chain: " << std::endl;
+	for (std::deque<int>::iterator it = _d.begin(); it != _d.end(); ++it)
+		std::cout << *it << " ";
+	std::cout << std::endl << std::endl;
 
 }
 
@@ -143,6 +167,8 @@ void PmergeMe::start()
 
 	recursionSort(pairs);
 
+	if (_straggler != -1)
+		binaryInsert(_d, _straggler);
 
 
 /*
