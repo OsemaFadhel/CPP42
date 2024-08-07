@@ -6,7 +6,7 @@
 /*   By: ofadhel <ofadhel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 22:42:59 by ofadhel           #+#    #+#             */
-/*   Updated: 2024/08/06 18:31:56 by ofadhel          ###   ########.fr       */
+/*   Updated: 2024/08/07 12:32:00 by ofadhel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,15 +38,6 @@ PmergeMe &PmergeMe::operator=(PmergeMe const &rhs)
 	}
 	return *this;
 }
-
-// Compare pairs by the value of it’s largest pair.
-struct ComparePairs
-{
-	bool operator()(std::pair<int, int> const &a, std::pair<int, int> const &b)
-	{
-		return std::max(a.first, a.second) < std::max(b.first, b.second);
-	}
-};
 
 //methods
 
