@@ -6,7 +6,7 @@
 /*   By: ofadhel <ofadhel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 22:42:59 by ofadhel           #+#    #+#             */
-/*   Updated: 2024/08/11 15:50:06 by ofadhel          ###   ########.fr       */
+/*   Updated: 2024/08/11 15:51:52 by ofadhel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ void PmergeMe::printDeque(std::string const str)
 
 void PmergeMe::recursionSort(std::deque<std::pair<int, int> > &pairs)
 {
+	//PROBLEM HERE 3 5 2 4 294 252 42 45 242 532 TEST IT
 	for (size_t i = 0; i < _d.size(); i += 2)
 		pairs.push_back(std::make_pair(_d[i], _d[i + 1]));
 	_d.clear();
