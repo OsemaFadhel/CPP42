@@ -6,7 +6,7 @@
 /*   By: ofadhel <ofadhel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 22:42:59 by ofadhel           #+#    #+#             */
-/*   Updated: 2024/08/07 18:41:42 by ofadhel          ###   ########.fr       */
+/*   Updated: 2024/08/11 15:50:06 by ofadhel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ PmergeMe::PmergeMe(std::deque<int> d, std::vector<int> v)
 	_v = v;
 	_straggler = -1; //used like a flag if the sequence is odd
 	printDeque("Before: ");
+ 	std::cout << std::endl;
 }
 
 PmergeMe::PmergeMe(PmergeMe const &src)
@@ -99,10 +100,6 @@ void PmergeMe::recursionSort(std::deque<std::pair<int, int> > &pairs)
 			std::swap(pairs[0].first, pairs[0].second);
 		_d.push_back(pairs[0].first);
 		_d.push_back(pairs[0].second);
-		//print d
-		for (std::deque<int>::iterator it = _d.begin(); it != _d.end(); ++it)
-			std::cout << *it << " ";
-		std::cout << "After recursion: " << std::endl << std::endl;
 		return;
 	}
 	for (std::deque<std::pair<int, int> >::iterator it = pairs.begin(); it != pairs.end(); ++it)
@@ -111,10 +108,7 @@ void PmergeMe::recursionSort(std::deque<std::pair<int, int> > &pairs)
 			std::swap(it->first, it->second);
 	}
 	std::deque<std::pair<int, int> > new_pairs;
-	//print pairs
-	for (std::deque<std::pair<int, int> >::iterator it = pairs.begin(); it != pairs.end(); ++it)
-		std::cout << "[" << it->first << ", " << it->second << "] ";
-	std::cout << std::endl;
+
 	if (pairs.size() % 2 == 0 || pairs.size() > 3)
 	{
 		for (size_t i = 0; i < pairs.size(); i += 2)
@@ -133,33 +127,24 @@ void PmergeMe::recursionSort(std::deque<std::pair<int, int> > &pairs)
 	std::deque<int> pend;
 	for (std::deque<std::pair<int, int> >::iterator it = pairs.begin(); it != pairs.end(); ++it)
 		pend.push_back(it->first);
-	for (std::deque<int>::iterator it = pend.begin(); it != pend.end(); ++it)
-		std::cout << *it << " ";
-	std::cout << std::endl;
 
 	std::deque<int> jacobsthal = jacobsthalSequenceD<std::deque<int> >(pend.size());
 	std::deque<int> insertionSequence = insertSequence(jacobsthal, pend.size());
 	for (size_t i = 0; i < pend.size(); i++)
 		binaryInsert(_d, pend[insertionSequence[i] - 1]);
-
-	std::cout << "Main chain: " << std::endl;
-	for (std::deque<int>::iterator it = _d.begin(); it != _d.end(); ++it)
-		std::cout << *it << " ";
-	std::cout << std::endl << std::endl;
-
 }
 
 void PmergeMe::start()
 {
 	//0. start timer
-	//std::clock_t start_d = std::clock();
+	std::clock_t start_d = std::clock();
+
 	//1. first check if the deque is even or odd.  If odd, remove the last element and call it straggler
 	if (_d.size() % 2 != 0)
 	{
 		_straggler = _d.back();
 		_d.pop_back();
 	}
-	std::cout << std::endl;
 
 	//2. Now we can start creating pairs
 	std::deque<std::pair<int, int> > pairs;
@@ -171,19 +156,19 @@ void PmergeMe::start()
 		binaryInsert(_d, _straggler);
 
 
-/*
+/* LAST WORKING VERSION
 	//3. Sorting the pairs, [a, b] where a < b
  	for (std::deque<std::pair<int, int> >::iterator it = pairs.begin(); it != pairs.end(); ++it)
 	{
 		if (it->first > it->second)
 			std::swap(it->first, it->second);
-	}*/
+	}
 
 	//here it should start the recursive sort or maybe the pair step before put it in the recursion
 
 
 
-/*
+
 	//5. Create a new sequence ‘pend’, by pulling out the [highest] value of each pair and inserting it into ‘pend’.
 	std::deque<int> pend;
 	for (std::deque<std::pair<int, int> >::iterator it = pairs.begin(); it != pairs.end(); ++it)
@@ -201,14 +186,16 @@ void PmergeMe::start()
 	//7. Loop through the elements in ‘pend’, and using the insertion sequence built in the previous step, use binary search to insert each ‘pend’ element into ‘_d’
 	for (size_t i = 0; i < pend.size(); i++)
 		binaryInsert(_d, pend[insertionSequence[i] - 1]);
+*/
+
 
 	//end timer
 	std::clock_t end_d = std::clock();
 	double process_time_deque = double(end_d - start_d) / CLOCKS_PER_SEC;
-*/
+
 	printDeque("After: ");
-	//startVector(); //now do the same with vector
-	//std::cout << "Time to process a range of " << _d.size() << " elements with std::deque: " << std::fixed << process_time_deque << "us" << std::endl;
+	startVector(); //now do the same with vector
+	std::cout << "Time to process a range of " << _d.size() << " elements with std::deque: " << std::fixed << process_time_deque << "us" << std::endl;
 
 }
 
@@ -218,6 +205,7 @@ void PmergeMe::start()
 void PmergeMe::startVector()
 {
 	std::clock_t start_v = std::clock();
+
 	if (_v.size() % 2 != 0)
 	{
 		_straggler = _v.back();
@@ -225,30 +213,11 @@ void PmergeMe::startVector()
 	}
 
 	std::vector<std::pair<int, int> > pairs;
-	for (size_t i = 0; i < _v.size(); i += 2)
-		pairs.push_back(std::make_pair(_v[i], _v[i + 1]));
-	_v.clear();
 
- 	for (std::vector<std::pair<int, int> >::iterator it = pairs.begin(); it != pairs.end(); ++it)
-	{
-		if (it->first > it->second)
-			std::swap(it->first, it->second);
-	}
+	recursionSortv(pairs);
 
-	std::vector<int> pend;
-	for (std::vector<std::pair<int, int> >::iterator it = pairs.begin(); it != pairs.end(); ++it)
-	{
-		_v.push_back(it->second);
-		pend.push_back(it->first);
-	}
 	if (_straggler != -1)
-		pend.push_back(_straggler);
-
-	std::vector<int> jacobsthal = jacobsthalSequenceD<std::vector<int> >(pend.size());
-	std::vector<int> insertionSequence = insertSequence(jacobsthal, pend.size());
-
-	for (size_t i = 0; i < pend.size(); i++)
-		binaryInsert(_v, pend[insertionSequence[i] - 1]);
+		binaryInsert(_v, _straggler);
 
 	std::clock_t end_v = std::clock();
 	double process_time_vector = double(end_v - start_v) / CLOCKS_PER_SEC;
@@ -256,15 +225,69 @@ void PmergeMe::startVector()
 	std::cout << "Time to process a range of " << _v.size() << " elements with std::vector: " << std::fixed << process_time_vector << "us" << std::endl;
 }
 
+void PmergeMe::recursionSortv(std::vector<std::pair<int, int> > &pairs)
+{
+	for (size_t i = 0; i < _v.size(); i += 2)
+		pairs.push_back(std::make_pair(_v[i], _v[i + 1]));\
+	//print the pairs
+	for (std::vector<std::pair<int, int> >::iterator it = pairs.begin(); it != pairs.end(); ++it)
+		std::cout << "[" << it->first << ", " << it->second << "] ";
+	std::cout << std::endl;
+
+	_v.clear();
+	if (pairs.size() == 1)
+	{
+		if (pairs[0].first > pairs[0].second)
+			std::swap(pairs[0].first, pairs[0].second);
+		_v.push_back(pairs[0].first);
+		_v.push_back(pairs[0].second);
+		return;
+	}
+	for (std::vector<std::pair<int, int> >::iterator it = pairs.begin(); it != pairs.end(); ++it)
+	{
+		if (it->first > it->second)
+			std::swap(it->first, it->second);
+	}
+	std::vector<std::pair<int, int> > new_pairs;
+
+	if (pairs.size() % 2 == 0 || pairs.size() > 3)
+	{
+		for (size_t i = 0; i < pairs.size(); i += 2)
+				new_pairs.push_back(std::make_pair(pairs[i].second, pairs[i + 1].second));
+	}
+	else
+	{
+		new_pairs.push_back(std::make_pair(pairs[0].second, pairs[1].second));
+		new_pairs.push_back(std::make_pair(pairs[2].first, pairs[2].second));
+		new_pairs.erase(new_pairs.begin() + 2);
+	}
+	recursionSortv(new_pairs);
+
+	std::vector<int> pend;
+	for (std::vector<std::pair<int, int> >::iterator it = pairs.begin(); it != pairs.end(); ++it)
+	{
+		std::cout << "it->first: " << it->first << std::endl;
+		pend.push_back(it->first);
+	}
+	std::cout << "pend size: " << std::endl;
+	std::vector<int> jacobsthal = jacobsthalSequenceD<std::vector<int> >(pend.size());
+	std::cout << "jacobsthal size: "<< std::endl;
+	std::vector<int> insertionSequence = insertSequence(jacobsthal, pend.size());
+	std::cout << "insertionSequence size: " << std::endl;
+	for (size_t i = 0; i < pend.size(); i++)
+		binaryInsert(_v, pend[insertionSequence[i] - 1]);
+
+}
+
 /* TEst with prints
 void PmergeMe::start()
 {
 	//1. first check if the deque is even or odd.  If odd, remove the last element and call it straggler
 	std::cout << "Checking if even or odd" << std::endl;
-	if (_d.size() % 2 != 0)
+	if (_v.size() % 2 != 0)
 	{
-		_straggler = _d.back();
-		_d.pop_back();
+		_straggler = _v.back();
+		_v.pop_back();
 	}
 	std::cout << std::endl;
 
