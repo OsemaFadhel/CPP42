@@ -6,7 +6,7 @@
 /*   By: ofadhel <ofadhel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 14:45:51 by ofadhel           #+#    #+#             */
-/*   Updated: 2024/08/03 21:47:05 by ofadhel          ###   ########.fr       */
+/*   Updated: 2024/08/10 16:20:47 by ofadhel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 #include <iostream>
 #include <stack>
 #include <string>
+#include <cstring>
+#include <stdio.h>
 
 class RPN
 {

@@ -6,7 +6,7 @@
 /*   By: ofadhel <ofadhel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 14:46:04 by ofadhel           #+#    #+#             */
-/*   Updated: 2024/07/29 15:40:48 by ofadhel          ###   ########.fr       */
+/*   Updated: 2024/08/10 16:25:45 by ofadhel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,7 @@ void RPN::check(std::string const &av)
 	for (size_t i = 0; i < av.length(); i++)
 	{
 		if (isdigit(av[i]))
-		{
-			if (av[1] - '0' < 0 || av[1] - '0' > 9)
-				throw std::invalid_argument("Error");
 			continue;
-		}
 		if (av[i] == ' ' || av[i] == '+' || av[i] == '-' || av[i] == '*' || av[i] == '/')
 			continue;
 		throw std::invalid_argument("Error");

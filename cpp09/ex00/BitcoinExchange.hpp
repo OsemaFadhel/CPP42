@@ -6,7 +6,7 @@
 /*   By: ofadhel <ofadhel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 15:30:07 by ofadhel           #+#    #+#             */
-/*   Updated: 2024/07/28 16:04:28 by ofadhel          ###   ########.fr       */
+/*   Updated: 2024/08/11 15:24:26 by ofadhel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,14 @@
 # define BITCOINEXCHANGE_HPP
 
 #include <iostream>
-#include <vector>
+#include <map>
 #include <algorithm>
+#include <fstream>
+#include <sstream>
+#include <stdexcept>
+#include <string>
+#include <cmath>
+#include <iomanip>
 
 class BitcoinExchange
 {
@@ -29,7 +35,8 @@ class BitcoinExchange
 		BitcoinExchange(BitcoinExchange const &obj);
 		void exchange(std::string filename);
 		void checkfiles(std::string filename);
-		void readfiles(std::ifstream file, std::ifstream datafile);
+		void readcsv();
+		void readinput(std::string filename);
 };
 
 #endif
