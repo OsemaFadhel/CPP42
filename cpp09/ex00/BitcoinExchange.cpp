@@ -6,7 +6,7 @@
 /*   By: ofadhel <ofadhel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 15:30:10 by ofadhel           #+#    #+#             */
-/*   Updated: 2024/08/11 15:29:55 by ofadhel          ###   ########.fr       */
+/*   Updated: 2024/08/12 18:07:36 by ofadhel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,8 @@ void BitcoinExchange::readinput(std::string filename)
 			std::getline(ss, value);
 			// Convert value to double
 			std::istringstream(value) >> rate;
-			_values[date] = rate;
+			//add to multimap
+			_values.insert(std::make_pair(date, rate));
 		}
 	}
 	//print map
