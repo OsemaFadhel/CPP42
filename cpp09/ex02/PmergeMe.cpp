@@ -6,7 +6,7 @@
 /*   By: ofadhel <ofadhel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 22:42:59 by ofadhel           #+#    #+#             */
-/*   Updated: 2024/08/11 15:51:52 by ofadhel          ###   ########.fr       */
+/*   Updated: 2024/08/11 15:55:06 by ofadhel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -195,7 +195,7 @@ void PmergeMe::start()
 	double process_time_deque = double(end_d - start_d) / CLOCKS_PER_SEC;
 
 	printDeque("After: ");
-	startVector(); //now do the same with vector
+	//startVector(); //now do the same with vector
 	std::cout << "Time to process a range of " << _d.size() << " elements with std::deque: " << std::fixed << process_time_deque << "us" << std::endl;
 
 }
