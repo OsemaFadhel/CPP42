@@ -67,7 +67,7 @@ This module is designed to help you understand templated containers, iterators a
 [More info!](https://github.com/OsemaFadhel/CPP42/tree/main/cpp08)
 
 
-# cpp09 <h2 align="right">-/100✅</h2>
+# cpp09 <h2 align="right">-/100</h2>
 
 This module is designed to help you understand the containers in CPP.
 [More info!](https://github.com/OsemaFadhel/CPP42/tree/main/cpp09)
