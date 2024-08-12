@@ -6,7 +6,7 @@
 /*   By: ofadhel <ofadhel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 14:46:04 by ofadhel           #+#    #+#             */
-/*   Updated: 2024/08/10 16:25:45 by ofadhel          ###   ########.fr       */
+/*   Updated: 2024/08/12 14:28:50 by ofadhel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,8 @@ void RPN::execute(std::string const &av)
 		else
 			calculate(av[i]);
 	}
-	/*if (_stack.size() != 1)
-		throw std::runtime_error("Error");*/
+	if (_stack.size() != 1)
+		throw std::runtime_error("Error: too many numbers left. Are you missing an operator?");
 	std::cout << _stack.top() << std::endl;
 }
 

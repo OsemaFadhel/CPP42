@@ -6,7 +6,7 @@
 /*   By: ofadhel <ofadhel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 22:42:59 by ofadhel           #+#    #+#             */
-/*   Updated: 2024/08/11 15:55:06 by ofadhel          ###   ########.fr       */
+/*   Updated: 2024/08/12 16:26:14 by ofadhel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ PmergeMe::PmergeMe(std::deque<int> d, std::vector<int> v)
 	_v = v;
 	_straggler = -1; //used like a flag if the sequence is odd
 	printDeque("Before: ");
- 	std::cout << std::endl;
 }
 
 PmergeMe::PmergeMe(PmergeMe const &src)
@@ -95,6 +94,8 @@ void PmergeMe::recursionSort(std::deque<std::pair<int, int> > &pairs)
 	for (size_t i = 0; i < _d.size(); i += 2)
 		pairs.push_back(std::make_pair(_d[i], _d[i + 1]));
 	_d.clear();
+
+	//check last pair
 	if (pairs.size() == 1)
 	{
 		if (pairs[0].first > pairs[0].second)
@@ -103,6 +104,8 @@ void PmergeMe::recursionSort(std::deque<std::pair<int, int> > &pairs)
 		_d.push_back(pairs[0].second);
 		return;
 	}
+
+	//order the pairs
 	for (std::deque<std::pair<int, int> >::iterator it = pairs.begin(); it != pairs.end(); ++it)
 	{
 		if (it->first > it->second)
@@ -110,24 +113,31 @@ void PmergeMe::recursionSort(std::deque<std::pair<int, int> > &pairs)
 	}
 	std::deque<std::pair<int, int> > new_pairs;
 
-	if (pairs.size() % 2 == 0 || pairs.size() > 3)
+
+
+
+
+	if (pairs.size() % 2 != 0)
 	{
-		for (size_t i = 0; i < pairs.size(); i += 2)
-				new_pairs.push_back(std::make_pair(pairs[i].second, pairs[i + 1].second));
+		for (size_t i = 0; i < pairs.size() - 1; i += 2)
+			new_pairs.push_back(std::make_pair(pairs[i].second, pairs[i + 1].second));
+		new_pairs.push_back(std::make_pair(pairs[pairs.size() - 1].first, pairs[pairs.size() - 1].second));
+		pairs.erase(pairs.end() - 1);
 	}
 	else
 	{
-		new_pairs.push_back(std::make_pair(pairs[0].second, pairs[1].second));
-		new_pairs.push_back(std::make_pair(pairs[2].first, pairs[2].second));
-		new_pairs.erase(new_pairs.begin() + 2);
+		for (size_t i = 0; i < pairs.size(); i += 2)
+			new_pairs.push_back(std::make_pair(pairs[i].second, pairs[i + 1].second));
 	}
 
-	//print the pairs
+
 	recursionSort(new_pairs);
 
 	std::deque<int> pend;
 	for (std::deque<std::pair<int, int> >::iterator it = pairs.begin(); it != pairs.end(); ++it)
 		pend.push_back(it->first);
+
+
 
 	std::deque<int> jacobsthal = jacobsthalSequenceD<std::deque<int> >(pend.size());
 	std::deque<int> insertionSequence = insertSequence(jacobsthal, pend.size());
@@ -195,7 +205,7 @@ void PmergeMe::start()
 	double process_time_deque = double(end_d - start_d) / CLOCKS_PER_SEC;
 
 	printDeque("After: ");
-	//startVector(); //now do the same with vector
+	startVector(); //now do the same with vector
 	std::cout << "Time to process a range of " << _d.size() << " elements with std::deque: " << std::fixed << process_time_deque << "us" << std::endl;
 
 }
@@ -230,12 +240,8 @@ void PmergeMe::recursionSortv(std::vector<std::pair<int, int> > &pairs)
 {
 	for (size_t i = 0; i < _v.size(); i += 2)
 		pairs.push_back(std::make_pair(_v[i], _v[i + 1]));\
-	//print the pairs
-	for (std::vector<std::pair<int, int> >::iterator it = pairs.begin(); it != pairs.end(); ++it)
-		std::cout << "[" << it->first << ", " << it->second << "] ";
-	std::cout << std::endl;
-
 	_v.clear();
+
 	if (pairs.size() == 1)
 	{
 		if (pairs[0].first > pairs[0].second)
@@ -251,30 +257,28 @@ void PmergeMe::recursionSortv(std::vector<std::pair<int, int> > &pairs)
 	}
 	std::vector<std::pair<int, int> > new_pairs;
 
-	if (pairs.size() % 2 == 0 || pairs.size() > 3)
+	if (pairs.size() % 2 != 0)
 	{
-		for (size_t i = 0; i < pairs.size(); i += 2)
-				new_pairs.push_back(std::make_pair(pairs[i].second, pairs[i + 1].second));
+		for (size_t i = 0; i < pairs.size() - 1; i += 2)
+			new_pairs.push_back(std::make_pair(pairs[i].second, pairs[i + 1].second));
+		new_pairs.push_back(std::make_pair(pairs[pairs.size() - 1].first, pairs[pairs.size() - 1].second));
+		pairs.erase(pairs.end() - 1);
 	}
 	else
 	{
-		new_pairs.push_back(std::make_pair(pairs[0].second, pairs[1].second));
-		new_pairs.push_back(std::make_pair(pairs[2].first, pairs[2].second));
-		new_pairs.erase(new_pairs.begin() + 2);
+		for (size_t i = 0; i < pairs.size(); i += 2)
+			new_pairs.push_back(std::make_pair(pairs[i].second, pairs[i + 1].second));
 	}
+
 	recursionSortv(new_pairs);
 
 	std::vector<int> pend;
 	for (std::vector<std::pair<int, int> >::iterator it = pairs.begin(); it != pairs.end(); ++it)
 	{
-		std::cout << "it->first: " << it->first << std::endl;
 		pend.push_back(it->first);
 	}
-	std::cout << "pend size: " << std::endl;
 	std::vector<int> jacobsthal = jacobsthalSequenceD<std::vector<int> >(pend.size());
-	std::cout << "jacobsthal size: "<< std::endl;
 	std::vector<int> insertionSequence = insertSequence(jacobsthal, pend.size());
-	std::cout << "insertionSequence size: " << std::endl;
 	for (size_t i = 0; i < pend.size(); i++)
 		binaryInsert(_v, pend[insertionSequence[i] - 1]);
 
