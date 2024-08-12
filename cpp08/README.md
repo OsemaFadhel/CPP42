@@ -1,4 +1,5 @@
-# CPP 00
+# CPP 08
+This will be the starting point of a C++ journey
 
 |Keywords| Skills |
 |:-----:|:-------:|
@@ -8,4 +9,5 @@
 
 <h2 align="center">Description</h2>
 
-# cpp00
+# cpp08
+
