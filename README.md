@@ -18,40 +18,56 @@ This will be the starting point of a C++ journey
 
 # cpp00
 
-This first module of C++ is designed to help you understand the specifities of the language when compared to C. Time to dive into Object Oriented Programming!
+This first module of C++ is designed to help you understand the specifities of the language when compared to C. Time to dive into Object Oriented Programming! [More info!](https://github.com/OsemaFadhel/CPP42/tree/main/cpp00)
 
 # cpp01
 
 This module is designed to help you understand the memory allocation, reference, pointers to members and the usage of the switch in CPP.
+[More info!](https://github.com/OsemaFadhel/CPP42/tree/main/cpp01)
+
 
 # cpp02
 
 This module is designed to help you understand Ad-hoc polymorphism, overloads and orthodox canonical classes in CPP.
+[More info!](https://github.com/OsemaFadhel/CPP42/tree/main/cpp02)
+
 
 # cpp03
 
 This module is designed to help you understand Inheritance in CPP.
+[More info!](https://github.com/OsemaFadhel/CPP42/tree/main/cpp03)
+
 
 # cpp04
 
 This module is designed to help you understand Subtype polymorphism, abstract classes and interfaces in CPP.
+[More info!](https://github.com/OsemaFadhel/CPP42/tree/main/cpp04)
+
 
 # cpp05
 
 This module is designed to help you understand Try/Catch and Exceptions in CPP.
+[More info!](https://github.com/OsemaFadhel/CPP42/tree/main/cpp05)
+
 
 # cpp06
 
 This module is designed to help you understand the different casts in CPP[static_cast, reinterpret_cast, dynamic_cast].
+[More info!](https://github.com/OsemaFadhel/CPP42/tree/main/cpp06)
+
 
 # cpp07
 
 This module is designed to help you understand Templates in CPP. [template<typename T, ...>]
+[More info!](https://github.com/OsemaFadhel/CPP42/tree/main/cpp07)
 
 # cpp08
 
 This module is designed to help you understand templated containers, iterators and algorithms in CPP. [vector, list, map, stack...].
+[More info!](https://github.com/OsemaFadhel/CPP42/tree/main/cpp08)
+
 
 # cpp09
 
 This module is designed to help you understand the containers in CPP.
+[More info!](https://github.com/OsemaFadhel/CPP42/tree/main/cpp09)
