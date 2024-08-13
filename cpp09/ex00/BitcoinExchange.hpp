@@ -6,7 +6,7 @@
 /*   By: ofadhel <ofadhel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 15:30:07 by ofadhel           #+#    #+#             */
-/*   Updated: 2024/08/12 17:31:53 by ofadhel          ###   ########.fr       */
+/*   Updated: 2024/08/13 12:45:49 by ofadhel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,7 @@
 class BitcoinExchange
 {
 	private:
-		std::multimap<std::string, double> _values;
-		std::map<std::string, double> _datacsv;
+		std::multimap<std::string, double> _datacsv;
 	public:
 		BitcoinExchange();
 		~BitcoinExchange();
@@ -37,6 +36,7 @@ class BitcoinExchange
 		void checkfiles(std::string filename);
 		void readcsv();
 		void readinput(std::string filename);
+		void execute();
 };
 
 #endif

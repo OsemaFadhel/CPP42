@@ -6,7 +6,7 @@
 /*   By: ofadhel <ofadhel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 15:30:10 by ofadhel           #+#    #+#             */
-/*   Updated: 2024/08/12 18:07:36 by ofadhel          ###   ########.fr       */
+/*   Updated: 2024/08/13 12:47:45 by ofadhel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void BitcoinExchange::readcsv()
 		// Convert exchangeRate to double
 		std::istringstream(exchangeRate) >> rate;
 		// Store the rate in the map
-		_datacsv[date] = rate;
+		_datacsv.insert(std::pair<std::string, double>(date, rate));
 	}
 	//print map
 	/*for (std::map<std::string, double>::iterator it = _datacsv.begin(); it != _datacsv.end(); ++it)
@@ -84,29 +84,34 @@ void BitcoinExchange::readinput(std::string filename)
 	double rate;
 
 	getline(file, line);
+
+	//change with finding first date then | then value no matter the spaces
 	if (line != "date | value")
 		throw std::runtime_error("Error: invalid file format.");
+
 	while (std::getline(file, line))
 	{
-		if (line.empty())
+		if (line.empty()) //skip empty lines
 			continue;
-		if (line.find('|') == std::string::npos)
+		if (line.find('|') == std::string::npos) //check if | is present in the line
 			std::cout << "Error: bad input => " << line << std::endl;
 		else
 		{
 			std::stringstream ss(line);
+
 			std::getline(ss, date, '|');
+			//check date format if it is Year-Month-Day. If not, print error message
+			//Error: bad input => <date>
+
 			std::getline(ss, value);
 			// Convert value to double
 			std::istringstream(value) >> rate;
-			//add to multimap
-			_values.insert(std::make_pair(date, rate));
+			//check rate if it is between 0 and 1000
+
+			std::cout << date << " => " << std::fixed << std::setprecision(2) << rate << std::endl;
+			//execute(date, rate);
 		}
 	}
-	//print map
-	for (std::map<std::string, double>::iterator it = _values.begin(); it != _values.end(); ++it)
-		std::cout << it->first << " => " << std::fixed << std::setprecision(2) << it->second << '\n';
-	std::cout << std::endl;
 }
 
 void BitcoinExchange::exchange(std::string filename)
