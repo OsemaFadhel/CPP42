@@ -6,7 +6,7 @@
 /*   By: ofadhel <ofadhel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 15:30:10 by ofadhel           #+#    #+#             */
-/*   Updated: 2024/08/13 12:47:45 by ofadhel          ###   ########.fr       */
+/*   Updated: 2024/08/15 20:19:29 by ofadhel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ BitcoinExchange &BitcoinExchange::operator=(BitcoinExchange const &obj)
 	return *this;
 }
 
-void BitcoinExchange::checkfiles(std::string filename)
+void BitcoinExchange::checkfiles(std::string const filename)
 {
 	(void)filename;
 	std::ifstream datafile("data.csv");
@@ -74,20 +74,74 @@ void BitcoinExchange::readcsv()
 	file.close();
 }
 
-void BitcoinExchange::readinput(std::string filename)
+int *getdate(std::string date)
 {
-	(void)filename;
-	std::ifstream file("input.txt");
+	int *dates = new int[3];
+	std::string year = date.substr(0, 4);
+	std::string month = date.substr(5, 2);
+	std::string day = date.substr(8, 2);
+	dates[0] = std::atoi(year.c_str());
+	dates[1] = std::atoi(month.c_str());
+	dates[2] = std::atoi(day.c_str());
+	return dates;
+}
+
+int checkDate(std::string date)
+{
+	if (date.length() != 10)
+	{
+		std::cout << "Error: bad input => " << date << std::endl;
+		return 1;
+	}
+	if (date[4] != '-' || date[7] != '-')
+	{
+		std::cout << "Error: bad input => " << date << std::endl;
+		return 1;
+	}
+
+	int *dates = getdate(date);
+	if (dates[0] < 2000 || dates[0] > 2022)
+	{
+		std::cout << "Error: bad input => " << date << std::endl;
+		return 1;
+	}
+	if (dates[1] < 1 || dates[1] > 12)
+	{
+		std::cout << "Error: bad input => " << date << std::endl;
+		return 1;
+	}
+	if (dates[2] < 1 || dates[2] > 31)
+	{
+		std::cout << "Error: bad input => " << date << std::endl;
+		return 1;
+	}
+
+	delete[] dates;
+	return 0;
+}
+
+void BitcoinExchange::execute(std::string const &date, double const rate)
+{
+	//find the closest date in data.csv map and multiply the rate with the exchange rate
+	//print the result date => rate
+	(void)date;
+	(void)rate;
+
+
+}
+
+void BitcoinExchange::readinput(std::string const &filename)
+{
+	std::ifstream file(filename.c_str());
 	std::string line;
 	std::string date;
 	std::string value;
 	double rate;
 
 	getline(file, line);
-
-	//change with finding first date then | then value no matter the spaces
+	//• Each line in this file must use the following format: "date | value"
 	if (line != "date | value")
-		throw std::runtime_error("Error: invalid file format.");
+		throw std::runtime_error("Error: bad format in the first line.");
 
 	while (std::getline(file, line))
 	{
@@ -98,15 +152,29 @@ void BitcoinExchange::readinput(std::string filename)
 		else
 		{
 			std::stringstream ss(line);
-
 			std::getline(ss, date, '|');
-			//check date format if it is Year-Month-Day. If not, print error message
-			//Error: bad input => <date>
-
 			std::getline(ss, value);
+			//check date format if it is Year-Month-Day, and its valid date. If not, print error message
+			//Error: bad input => <date>
+			date.erase(0, date.find_first_not_of(" \n\r\t")); //remove leading spaces
+			date.erase(date.find_last_not_of(" \n\r\t") + 1); //remove trailing spaces
+			if (checkDate(date) == 1)
+				continue;
+
 			// Convert value to double
 			std::istringstream(value) >> rate;
+
 			//check rate if it is between 0 and 1000
+			if (rate < 0)
+			{
+				std::cout << "Error: not a positive number." << std::endl;
+				continue;
+			}
+			else if (rate > 1000)
+			{
+				std::cout << "Error: too large a number." << std::endl;
+				continue;
+			}
 
 			std::cout << date << " => " << std::fixed << std::setprecision(2) << rate << std::endl;
 			//execute(date, rate);
@@ -114,7 +182,7 @@ void BitcoinExchange::readinput(std::string filename)
 	}
 }
 
-void BitcoinExchange::exchange(std::string filename)
+void BitcoinExchange::exchange(std::string const &filename)
 {
 	try
 	{

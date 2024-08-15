@@ -6,7 +6,7 @@
 /*   By: ofadhel <ofadhel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 15:30:07 by ofadhel           #+#    #+#             */
-/*   Updated: 2024/08/13 12:45:49 by ofadhel          ###   ########.fr       */
+/*   Updated: 2024/08/15 19:44:53 by ofadhel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,11 @@ class BitcoinExchange
 		~BitcoinExchange();
 		BitcoinExchange &operator=(BitcoinExchange const &obj);
 		BitcoinExchange(BitcoinExchange const &obj);
-		void exchange(std::string filename);
-		void checkfiles(std::string filename);
+		void exchange(std::string const &filename);
+		void checkfiles(std::string const filename);
 		void readcsv();
-		void readinput(std::string filename);
-		void execute();
+		void readinput(std::string const &filename);
+		void execute(std::string const &date, double const rate);
 };
 
 #endif
