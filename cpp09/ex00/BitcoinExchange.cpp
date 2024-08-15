@@ -6,7 +6,7 @@
 /*   By: ofadhel <ofadhel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 15:30:10 by ofadhel           #+#    #+#             */
-/*   Updated: 2024/08/15 20:19:29 by ofadhel          ###   ########.fr       */
+/*   Updated: 2024/08/15 20:37:33 by ofadhel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ int checkDate(std::string date)
 	}
 
 	int *dates = getdate(date);
-	if (dates[0] < 2000 || dates[0] > 2022)
+	if (dates[0] < 2009 || dates[0] > 2022)
 	{
 		std::cout << "Error: bad input => " << date << std::endl;
 		return 1;
@@ -124,10 +124,31 @@ void BitcoinExchange::execute(std::string const &date, double const rate)
 {
 	//find the closest date in data.csv map and multiply the rate with the exchange rate
 	//print the result date => rate
-	(void)date;
-	(void)rate;
+	//If the date used in the input does not exist in your DB then you must use the closest date contained in your DB
 
+	std::multimap<std::string, double>::iterator it;
+	for (it = _datacsv.begin(); it != _datacsv.end(); ++it)
+	{
+		if (it->first == date)
+		{
+			std::cout << date << " => " << std::fixed << std::setprecision(2) << rate * it->second << std::endl;
+			return;
+		}
+	}
+	std::string closestDate;
+	double closestRate;
 
+	for (it = _datacsv.begin(); it != _datacsv.end(); ++it)
+	{
+		if (it->first < date)
+		{
+			closestDate = it->first;
+			closestRate = it->second;
+		}
+		else
+			break;
+	}
+	std::cout << date << " => " << std::fixed << std::setprecision(2) << rate * closestRate << std::endl;
 }
 
 void BitcoinExchange::readinput(std::string const &filename)
@@ -176,8 +197,8 @@ void BitcoinExchange::readinput(std::string const &filename)
 				continue;
 			}
 
-			std::cout << date << " => " << std::fixed << std::setprecision(2) << rate << std::endl;
-			//execute(date, rate);
+			//std::cout << date << " => " << std::fixed << std::setprecision(2) << rate << std::endl;
+			execute(date, rate);
 		}
 	}
 }
