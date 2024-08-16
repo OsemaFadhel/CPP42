@@ -6,7 +6,7 @@
 /*   By: ofadhel <ofadhel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 22:42:59 by ofadhel           #+#    #+#             */
-/*   Updated: 2024/08/13 12:18:34 by ofadhel          ###   ########.fr       */
+/*   Updated: 2024/08/16 11:17:44 by ofadhel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -202,11 +202,14 @@ void PmergeMe::start()
 
 	//end timer
 	std::clock_t end_d = std::clock();
-	double process_time_deque = double(end_d - start_d) / CLOCKS_PER_SEC;
+	/*clock() returns the processor time consumed by the program. The result is in clock ticks.
+	CLOCKS_PER_SEC is the number of clock ticks per second, used to convert the clock ticks into seconds.*/
+
+	double process_time_deque = static_cast<double>(end_d - start_d) / CLOCKS_PER_SEC * 1000; //* 10.... convert to milliseconds
 
 	printDeque("After: ");
 	startVector(); //now do the same with vector
-	std::cout << "Time to process a range of " << _d.size() << " elements with std::deque: " << std::fixed << process_time_deque << "us" << std::endl;
+	std::cout << "Time to process a range of " << _d.size() << " elements with std::deque: " << std::fixed << process_time_deque << "ms" << std::endl;
 
 }
 
@@ -231,9 +234,9 @@ void PmergeMe::startVector()
 		binaryInsert(_v, _straggler);
 
 	std::clock_t end_v = std::clock();
-	double process_time_vector = double(end_v - start_v) / CLOCKS_PER_SEC;
+	double process_time_vector = double(end_v - start_v) / CLOCKS_PER_SEC * 1000;
 
-	std::cout << "Time to process a range of " << _v.size() << " elements with std::vector: " << std::fixed << process_time_vector << "us" << std::endl;
+	std::cout << "Time to process a range of " << _v.size() << " elements with std::vector: " << std::fixed << process_time_vector << "ms" << std::endl;
 }
 
 void PmergeMe::recursionSortv(std::vector<std::pair<int, int> > &pairs)

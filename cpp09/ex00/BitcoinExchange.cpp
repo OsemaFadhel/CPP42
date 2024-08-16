@@ -6,7 +6,7 @@
 /*   By: ofadhel <ofadhel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 15:30:10 by ofadhel           #+#    #+#             */
-/*   Updated: 2024/08/15 20:37:33 by ofadhel          ###   ########.fr       */
+/*   Updated: 2024/08/16 10:33:25 by ofadhel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,17 +103,27 @@ int checkDate(std::string date)
 	if (dates[0] < 2009 || dates[0] > 2022)
 	{
 		std::cout << "Error: bad input => " << date << std::endl;
-		return 1;
+		return 	delete[] dates, 1;
 	}
 	if (dates[1] < 1 || dates[1] > 12)
 	{
 		std::cout << "Error: bad input => " << date << std::endl;
-		return 1;
+		return 	delete[] dates, 1;
 	}
 	if (dates[2] < 1 || dates[2] > 31)
 	{
 		std::cout << "Error: bad input => " << date << std::endl;
-		return 1;
+		return 	delete[] dates, 1;
+	}
+	if (dates[1] == 2 && dates[2] > 29)
+	{
+		std::cout << "Error: bad input => " << date << std::endl;
+		return 	delete[] dates, 1;
+	}
+	if ((dates[1] == 4 || dates[1] == 6 || dates[1] == 9 || dates[1] == 11) && dates[2] > 30)
+	{
+		std::cout << "Error: bad input => " << date << std::endl;
+		return 	delete[] dates, 1;
 	}
 
 	delete[] dates;
@@ -201,6 +211,7 @@ void BitcoinExchange::readinput(std::string const &filename)
 			execute(date, rate);
 		}
 	}
+	file.close();
 }
 
 void BitcoinExchange::exchange(std::string const &filename)
