@@ -1,4 +1,4 @@
-# CPP 04
+<h1 align="center">CPP 04</h1>
 
 C++ is a general-purpose programming language created by Bjarne Stroustrup as an extension of the C programming language, or "C with Classes".
 <br>
@@ -16,7 +16,6 @@ This will be the starting point of a C++ journey
 
 <h2 align="center">Description</h2>
 
-# cpp04
 
 
 

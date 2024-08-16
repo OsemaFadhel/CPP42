@@ -1,4 +1,4 @@
-# CPP 08
+<h1 align="center">CPP 08</h1>
 This will be the starting point of a C++ journey
 
 |Keywords| Skills |
@@ -9,5 +9,4 @@ This will be the starting point of a C++ journey
 
 <h2 align="center">Description</h2>
 
-# cpp08
 

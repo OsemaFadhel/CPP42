@@ -1,4 +1,4 @@
-# CPP 01
+<h1 align="center">CPP 01</h1>
 
 |Keywords| Skills |
 |:-----:|:-------:|
@@ -7,6 +7,4 @@
 | OOP | Rigor |
 
 <h2 align="center">Description</h2>
-
-# cpp01
 

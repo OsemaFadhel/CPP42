@@ -1,4 +1,4 @@
-# CPP 03
+<h1 align="center">CPP 03</h1>
 
 |Keywords| Skills |
 |:-----:|:-------:|
@@ -8,4 +8,3 @@
 
 <h2 align="center">Description</h2>
 
-# cpp03
