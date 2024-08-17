@@ -6,7 +6,7 @@
 /*   By: ofadhel <ofadhel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 15:30:10 by ofadhel           #+#    #+#             */
-/*   Updated: 2024/08/16 10:33:25 by ofadhel          ###   ########.fr       */
+/*   Updated: 2024/08/17 14:00:16 by ofadhel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,18 +33,17 @@ BitcoinExchange &BitcoinExchange::operator=(BitcoinExchange const &obj)
 
 void BitcoinExchange::checkfiles(std::string const filename)
 {
-	(void)filename;
 	std::ifstream datafile("data.csv");
 	if (!datafile)
 		throw std::runtime_error("Error: data.csv file is missing.");
 	if (datafile.peek() == std::ifstream::traits_type::eof())
 		throw std::runtime_error("Error: data file is empty.");
-	/*std::ifstream file(filename);
+	std::ifstream file(filename.c_str());
 	if (!file)
 		throw std::runtime_error("Error: could not open file.");
 	if (file.peek() == std::ifstream::traits_type::eof())
 		throw std::runtime_error("Error: file is empty.");
-	file.close();*/
+	file.close();
 	datafile.close();
 
 }
